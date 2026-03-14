@@ -9,235 +9,218 @@
     <style>
         :root {
             --navy:#0d2137; --teal:#006D77; --teal-light:#83C5BE; --teal-muted:#EDF6F9;
-            --gold:#B5985A; --gold-light:#F5EDD8;
             --border:#D4D8E0; --gray-50:#F7F8FA; --gray-100:#ECEEF2;
             --gray-400:#8C94A6; --gray-700:#3A4356; --text:#111827; --r:6px;
-            --black:#1a1a2e; --red:#C0392B; --yellow:#D4A017; --green:#1a7a4a;
+            --red:#C0392B; --yellow:#D4A017; --green:#1a7a4a;
             --black-bg:#f0f0f4; --red-bg:#fdf0ef; --yellow-bg:#fef9ec; --green-bg:#edf7f1;
         }
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
         html{scroll-behavior:smooth}
         body{font-family:'DM Sans',sans-serif;background:#F0F2F6;color:var(--text);min-height:100vh}
 
-        /* ── HEADER ── */
-        .hdr{background:var(--navy);height:64px;display:flex;align-items:center;padding:0 40px;position:sticky;top:0;z-index:100;border-bottom:3px solid var(--teal)}
-        .hdr-left{display:flex;align-items:center;gap:14px}
-        .hdr-icon{width:36px;height:36px;background:var(--teal);border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-        .hdr-icon svg{width:18px;height:18px;fill:none;stroke:white;stroke-width:2.2}
-        .hdr h1{font-family:'EB Garamond',serif;font-size:1.15rem;font-weight:500;color:white;line-height:1.3}
+        .hdr{background:var(--navy);height:56px;display:flex;align-items:center;padding:0 20px;position:sticky;top:0;z-index:100;border-bottom:3px solid var(--teal)}
+        .hdr-icon{width:32px;height:32px;background:var(--teal);border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-right:12px}
+        .hdr-icon svg{width:16px;height:16px;fill:none;stroke:white;stroke-width:2.2}
+        .hdr h1{font-family:'EB Garamond',serif;font-size:1.05rem;font-weight:500;color:white;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
         .hdr h1 em{color:var(--teal-light)}
 
-        /* ── LAYOUT ── */
-        .wrap{max-width:860px;margin:0 auto;padding:36px 24px 100px;display:flex;flex-direction:column;gap:20px}
+        .wrap{max-width:860px;margin:0 auto;padding:18px 12px 80px;display:flex;flex-direction:column;gap:14px}
         .card{background:white;border-radius:10px;box-shadow:0 1px 3px rgba(13,33,55,.07),0 4px 16px rgba(13,33,55,.05);overflow:hidden}
-        .card-hdr{padding:18px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
-        .card-hdr-num{width:28px;height:28px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:white;flex-shrink:0}
-        .card-hdr h2{font-family:'EB Garamond',serif;font-size:1.15rem;font-weight:500;color:var(--navy)}
-        .card-hdr .sub{font-size:.75rem;color:var(--gray-400);margin-top:1px}
-        .card-body{padding:28px}
+        .card-hdr{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+        .card-hdr-num{width:26px;height:26px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:white;flex-shrink:0}
+        .card-hdr h2{font-family:'EB Garamond',serif;font-size:1.1rem;font-weight:500;color:var(--navy)}
+        .card-hdr .sub{font-size:.72rem;color:var(--gray-400);margin-top:1px}
 
-        /* ── GUIDE ── */
-        .guide-hero{background:linear-gradient(135deg,var(--navy) 0%,#1a3a54 100%);border-radius:10px;padding:36px 40px;color:white;margin-bottom:0}
-        .guide-hero h2{font-family:'EB Garamond',serif;font-size:2rem;font-weight:500;margin-bottom:10px;line-height:1.3}
+        .guide-hero{background:linear-gradient(135deg,var(--navy) 0%,#1a3a54 100%);padding:26px 22px;color:white}
+        .guide-hero h2{font-family:'EB Garamond',serif;font-size:1.65rem;font-weight:500;margin-bottom:8px;line-height:1.3}
         .guide-hero h2 em{color:var(--teal-light)}
-        .guide-hero p{font-size:.95rem;color:rgba(255,255,255,.8);line-height:1.7;max-width:600px}
-        .guide-steps{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:28px}
-        .guide-step{background:var(--gray-50);border:1px solid var(--border);border-radius:8px;padding:16px 18px;display:flex;gap:14px;align-items:flex-start}
-        .guide-step-num{width:28px;height:28px;background:var(--teal);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:white;flex-shrink:0;margin-top:1px}
-        .guide-step h4{font-size:.85rem;font-weight:600;color:var(--navy);margin-bottom:4px}
-        .guide-step p{font-size:.78rem;color:var(--gray-700);line-height:1.5}
-        .scale-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0 28px 28px}
-        .scale-item{border-radius:8px;padding:12px 14px;border:1.5px solid}
+        .guide-hero p{font-size:.86rem;color:rgba(255,255,255,.8);line-height:1.7}
+
+        .guide-steps{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:16px}
+        .guide-step{background:var(--gray-50);border:1px solid var(--border);border-radius:8px;padding:12px 13px;display:flex;gap:10px;align-items:flex-start}
+        .guide-step-num{width:22px;height:22px;background:var(--teal);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;color:white;flex-shrink:0;margin-top:2px}
+        .guide-step h4{font-size:.8rem;font-weight:600;color:var(--navy);margin-bottom:3px}
+        .guide-step p{font-size:.72rem;color:var(--gray-700);line-height:1.5}
+
+        .scale-section{padding:0 16px 16px}
+        .scale-section-label{font-size:.67rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-400);margin-bottom:7px}
+        .scale-row{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+        .scale-item{border-radius:7px;padding:9px 10px;border:1.5px solid}
         .scale-item.sc-black{background:var(--black-bg);border-color:#ccc}
         .scale-item.sc-red{background:var(--red-bg);border-color:rgba(192,57,43,.3)}
         .scale-item.sc-yellow{background:var(--yellow-bg);border-color:rgba(212,160,23,.3)}
         .scale-item.sc-green{background:var(--green-bg);border-color:rgba(26,122,74,.3)}
-        .scale-emoji{font-size:1.4rem;margin-bottom:6px}
-        .scale-range{font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gray-400);margin-bottom:3px}
-        .scale-label{font-size:.78rem;font-weight:600;color:var(--navy);margin-bottom:4px}
-        .scale-desc{font-size:.71rem;color:var(--gray-700);line-height:1.4}
-        .start-btn-wrap{padding:0 28px 28px;display:flex;gap:12px}
+        .scale-emoji{font-size:1.15rem;margin-bottom:4px}
+        .scale-range{font-size:.61rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-400);margin-bottom:2px}
+        .scale-label{font-size:.73rem;font-weight:600;color:var(--navy);margin-bottom:2px}
+        .scale-desc{font-size:.66rem;color:var(--gray-700);line-height:1.4}
+        .start-btn-wrap{padding:0 16px 16px}
 
-        /* ── PRINCIPLES NAV ── */
-        .p-nav{display:flex;flex-wrap:wrap;gap:6px;padding:16px 28px;border-bottom:1px solid var(--border)}
-        .p-nav-btn{padding:5px 12px;border-radius:20px;border:1.5px solid var(--border);background:white;font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:600;color:var(--gray-400);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:5px}
+        .overall-prog-bar{height:3px;background:var(--gray-100)}
+        .overall-prog-fill{height:100%;background:var(--teal);transition:width .4s}
+
+        .p-nav{display:flex;flex-wrap:wrap;gap:5px;padding:10px 16px;border-bottom:1px solid var(--border)}
+        .p-nav-btn{padding:4px 9px;border-radius:20px;border:1.5px solid var(--border);background:white;font-family:'DM Sans',sans-serif;font-size:.7rem;font-weight:600;color:var(--gray-400);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:4px}
         .p-nav-btn:hover{border-color:var(--teal);color:var(--teal)}
         .p-nav-btn.active{background:var(--teal);border-color:var(--teal);color:white}
-        .p-nav-btn .dot{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.5}
+        .p-nav-btn .dot{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.5;flex-shrink:0}
         .p-nav-btn.done .dot{opacity:1}
 
-        /* ── PRINCIPLE PANEL ── */
         .p-panel{display:none}.p-panel.active{display:block}
-        .p-title{padding:20px 28px 4px}
-        .p-title h3{font-family:'EB Garamond',serif;font-size:1.3rem;color:var(--navy);font-weight:500;margin-bottom:6px}
-        .p-title p{font-size:.83rem;color:var(--gray-700);line-height:1.6;padding-bottom:16px;border-bottom:1px solid var(--border)}
-        .questions{padding:20px 28px;display:flex;flex-direction:column;gap:18px}
+        .p-title{padding:14px 16px 4px}
+        .p-title h3{font-family:'EB Garamond',serif;font-size:1.1rem;color:var(--navy);font-weight:500;margin-bottom:5px}
+        .p-title p{font-size:.78rem;color:var(--gray-700);line-height:1.6;padding-bottom:12px;border-bottom:1px solid var(--border)}
+        .questions{padding:12px 16px;display:flex;flex-direction:column;gap:10px}
         .q-block{border:1.5px solid var(--border);border-radius:8px;overflow:hidden;transition:border-color .2s}
         .q-block.answered{border-color:var(--teal)}
-        .q-text{padding:13px 16px;background:var(--gray-50);border-bottom:1px solid var(--border);font-family:'EB Garamond',serif;font-size:.97rem;color:var(--navy);line-height:1.5}
-        .q-num{font-family:'DM Sans',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gray-400);display:block;margin-bottom:3px}
-        .scale-btns{display:flex;padding:10px 12px;gap:6px;flex-wrap:wrap}
-        .scale-btn{flex:1;min-width:60px;padding:8px 4px;border:1.5px solid var(--border);border-radius:6px;background:white;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:600;color:var(--gray-400);cursor:pointer;transition:all .12s;text-align:center;line-height:1.3}
+        .q-text{padding:10px 12px;background:var(--gray-50);border-bottom:1px solid var(--border);font-family:'EB Garamond',serif;font-size:.92rem;color:var(--navy);line-height:1.5}
+        .q-num{font-family:'DM Sans',sans-serif;font-size:.61rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gray-400);display:block;margin-bottom:2px}
+
+        /* 6-column grid on desktop, 3-column on mobile, 2-column on tiny */
+        .scale-btns{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;padding:7px 9px}
+        .scale-btn{padding:7px 3px;border:1.5px solid var(--border);border-radius:6px;background:white;font-family:'DM Sans',sans-serif;font-size:.67rem;font-weight:600;color:var(--gray-400);cursor:pointer;transition:all .12s;text-align:center;line-height:1.3}
         .scale-btn:hover{border-color:var(--gray-400);color:var(--gray-700)}
         .scale-btn.sel-1,.scale-btn.sel-2,.scale-btn.sel-3,.scale-btn.sel-4,.scale-btn.sel-5{background:var(--teal);border-color:var(--teal);color:white}
         .scale-btn.sel-6{background:var(--gray-100);border-color:var(--gray-400);color:var(--gray-700)}
 
-        /* ── PROGRESS ── */
-        .p-footer{padding:14px 28px;border-top:1px solid var(--border);display:flex;align-items:center;gap:16px}
-        .p-prog{flex:1;height:5px;background:var(--gray-100);border-radius:3px;overflow:hidden}
-        .p-prog-fill{height:100%;background:var(--teal);border-radius:3px;transition:width .3s}
-        .p-prog-label{font-size:.72rem;color:var(--gray-400);white-space:nowrap}
-        .p-nav-arrows{display:flex;gap:8px}
-        .arrow-btn{padding:8px 16px;border-radius:var(--r);border:1.5px solid var(--border);background:white;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:600;color:var(--gray-700);cursor:pointer;transition:all .15s}
+        .p-footer{padding:10px 16px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px}
+        .p-prog{flex:1;height:4px;background:var(--gray-100);border-radius:2px;overflow:hidden}
+        .p-prog-fill{height:100%;background:var(--teal);border-radius:2px;transition:width .3s}
+        .p-prog-label{font-size:.67rem;color:var(--gray-400);white-space:nowrap}
+        .p-nav-arrows{display:flex;gap:6px;flex-shrink:0}
+        .arrow-btn{padding:7px 13px;border-radius:var(--r);border:1.5px solid var(--border);background:white;font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:600;color:var(--gray-700);cursor:pointer;transition:all .15s;white-space:nowrap}
         .arrow-btn:hover{border-color:var(--teal);color:var(--teal)}
         .arrow-btn.primary{background:var(--teal);border-color:var(--teal);color:white}
         .arrow-btn.primary:hover{background:#005a62}
 
-        /* ── RESULTS ── */
-        .results-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:28px}
+        .results-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:16px}
         .results-chart-wrap{display:flex;justify-content:center;align-items:center}
-        .results-list{display:flex;flex-direction:column;gap:8px}
-        .r-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;border:1.5px solid var(--border)}
+        .results-list{display:flex;flex-direction:column;gap:5px}
+        .r-row{display:flex;align-items:center;gap:7px;padding:7px 9px;border-radius:7px;border:1.5px solid}
         .r-row.sc-black{background:var(--black-bg);border-color:#ccc}
         .r-row.sc-red{background:var(--red-bg);border-color:rgba(192,57,43,.25)}
         .r-row.sc-yellow{background:var(--yellow-bg);border-color:rgba(212,160,23,.25)}
         .r-row.sc-green{background:var(--green-bg);border-color:rgba(26,122,74,.25)}
-        .r-emoji{font-size:1.2rem;flex-shrink:0}
-        .r-name{font-size:.78rem;font-weight:600;color:var(--navy);flex:1;line-height:1.3}
-        .r-score{font-family:'EB Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--navy);flex-shrink:0}
-        .r-na{font-size:.63rem;color:var(--gray-400)}
-        .r-bar{height:4px;border-radius:2px;margin-top:4px}
+        .r-emoji{font-size:1rem;flex-shrink:0}
+        .r-name{font-size:.72rem;font-weight:600;color:var(--navy);flex:1;line-height:1.3}
+        .r-score{font-family:'EB Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--navy);flex-shrink:0}
+        .r-na{font-size:.59rem;color:var(--gray-400)}
+        .r-bar{height:3px;border-radius:2px;margin-top:3px}
         .r-bar.sc-black{background:#aaa}
         .r-bar.sc-red{background:var(--red)}
         .r-bar.sc-yellow{background:var(--yellow)}
         .r-bar.sc-green{background:var(--green)}
 
-        /* ── INTERPRET ── */
-        .interpret-wrap{display:flex;flex-direction:column;gap:16px;padding:28px}
-        .interp-block{border:1.5px solid var(--border);border-radius:10px;overflow:hidden}
-        .interp-hdr{padding:13px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none}
+        .score-legend-wrap{padding:0 16px 16px}
+        .score-legend-label{font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-400);margin-bottom:6px}
+        .score-legend{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+        .sl-item{border-radius:7px;padding:8px 9px;border:1.5px solid;display:flex;align-items:flex-start;gap:5px}
+        .sl-item.sc-black{background:var(--black-bg);border-color:#ccc}
+        .sl-item.sc-red{background:var(--red-bg);border-color:rgba(192,57,43,.3)}
+        .sl-item.sc-yellow{background:var(--yellow-bg);border-color:rgba(212,160,23,.3)}
+        .sl-item.sc-green{background:var(--green-bg);border-color:rgba(26,122,74,.3)}
+        .sl-emoji{font-size:.95rem;flex-shrink:0}
+        .sl-range{font-size:.59rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--gray-400);margin-bottom:2px}
+        .sl-label{font-size:.7rem;font-weight:600;color:var(--navy)}
+
+        .interpret-wrap{display:flex;flex-direction:column;gap:10px;padding:16px}
+        .interp-block{border:1.5px solid var(--border);border-radius:9px;overflow:hidden}
+        .interp-hdr{padding:10px 14px;display:flex;align-items:center;gap:9px;cursor:pointer;user-select:none}
         .interp-hdr:hover{background:var(--gray-50)}
-        .interp-emoji{font-size:1.3rem;flex-shrink:0}
-        .interp-title{font-family:'EB Garamond',serif;font-size:1rem;color:var(--navy);flex:1;font-weight:500}
-        .interp-score-badge{padding:3px 10px;border-radius:20px;font-size:.73rem;font-weight:700;flex-shrink:0}
-        .interp-toggle{font-size:.75rem;color:var(--gray-400);transition:transform .2s;flex-shrink:0}
+        .interp-emoji{font-size:1.1rem;flex-shrink:0}
+        .interp-title{font-family:'EB Garamond',serif;font-size:.93rem;color:var(--navy);flex:1;font-weight:500;line-height:1.3}
+        .interp-score-badge{padding:2px 8px;border-radius:20px;font-size:.68rem;font-weight:700;flex-shrink:0}
+        .interp-score-badge.sc-black{background:var(--black-bg);color:#555}
+        .interp-score-badge.sc-red{background:var(--red-bg);color:var(--red)}
+        .interp-score-badge.sc-yellow{background:var(--yellow-bg);color:#9a7010}
+        .interp-score-badge.sc-green{background:var(--green-bg);color:var(--green)}
+        .interp-toggle{font-size:.7rem;color:var(--gray-400);transition:transform .2s;flex-shrink:0}
         .interp-toggle.open{transform:rotate(180deg)}
         .interp-body{display:none;border-top:1px solid var(--border)}
         .interp-body.open{display:block}
-        .interp-levels{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-bottom:1px solid var(--border)}
-        .interp-level{padding:12px 14px;border-right:1px solid var(--border)}
+        .interp-levels{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border)}
+        .interp-level{padding:10px 11px;border-right:1px solid var(--border)}
         .interp-level:last-child{border-right:none}
-        .il-label{font-size:.63rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:4px}
-        .il-active{border-radius:6px}
-        .il-can{font-size:.75rem;color:var(--gray-700);line-height:1.5}
-        .interp-example{padding:14px 16px;background:var(--gray-50)}
-        .ie-label{font-size:.63rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-400);margin-bottom:8px}
-        .ie-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-        .ie-item{font-size:.73rem;color:var(--gray-700);line-height:1.45;padding:8px 10px;background:white;border-radius:6px;border:1px solid var(--border)}
-        .ie-dot{font-size:.8rem;margin-bottom:4px}
-
-        /* Highlight active level */
+        .il-label{font-size:.59rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px;display:flex;align-items:center;gap:3px;flex-wrap:wrap}
+        .il-can{font-size:.71rem;color:var(--gray-700);line-height:1.5}
         .interp-level.lv-black.current{background:var(--black-bg)}
         .interp-level.lv-red.current{background:var(--red-bg)}
         .interp-level.lv-yellow.current{background:var(--yellow-bg)}
         .interp-level.lv-green.current{background:var(--green-bg)}
-        .ie-item.lv-black.current{background:var(--black-bg);border-color:#bbb}
-        .ie-item.lv-red.current{background:var(--red-bg);border-color:rgba(192,57,43,.3)}
-        .ie-item.lv-yellow.current{background:var(--yellow-bg);border-color:rgba(212,160,23,.3)}
-        .ie-item.lv-green.current{background:var(--green-bg);border-color:rgba(26,122,74,.3)}
-        .current-marker{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-left:4px;padding:1px 5px;border-radius:3px;vertical-align:middle}
+        .current-marker{font-size:.56rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding:1px 4px;border-radius:3px}
         .lv-black .current-marker{background:#ddd;color:#555}
         .lv-red .current-marker{background:rgba(192,57,43,.15);color:var(--red)}
         .lv-yellow .current-marker{background:rgba(212,160,23,.15);color:#9a7010}
         .lv-green .current-marker{background:rgba(26,122,74,.15);color:var(--green)}
+        .interp-example{padding:11px 13px;background:var(--gray-50)}
+        .ie-label{font-size:.61rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-400);margin-bottom:6px}
+        .ie-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+        .ie-item{font-size:.7rem;color:var(--gray-700);line-height:1.45;padding:7px 8px;background:white;border-radius:6px;border:1px solid var(--border)}
+        .ie-dot{font-size:.74rem;margin-bottom:3px}
+        .ie-item.lv-black.current{background:var(--black-bg);border-color:#bbb}
+        .ie-item.lv-red.current{background:var(--red-bg);border-color:rgba(192,57,43,.3)}
+        .ie-item.lv-yellow.current{background:var(--yellow-bg);border-color:rgba(212,160,23,.3)}
+        .ie-item.lv-green.current{background:var(--green-bg);border-color:rgba(26,122,74,.3)}
 
-        /* ── BUTTONS ── */
-        .btn{font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;padding:10px 20px;border-radius:var(--r);border:none;cursor:pointer;transition:all .15s}
+        .btn{font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:600;padding:9px 17px;border-radius:var(--r);border:none;cursor:pointer;transition:all .15s}
         .btn-primary{background:var(--teal);color:white}.btn-primary:hover{background:#005a62}
         .btn-ghost{background:transparent;color:var(--gray-700);border:1.5px solid var(--border)}.btn-ghost:hover{border-color:var(--gray-400)}
-        .action-row{padding:20px 28px;display:flex;gap:12px;flex-wrap:wrap}
+        .action-row{padding:14px 16px;display:flex;gap:9px;flex-wrap:wrap}
 
-        /* ── INCOMPLETE WARNING ── */
-        .incomplete-banner{background:#fff8ec;border:1.5px solid rgba(212,160,23,.4);border-radius:8px;padding:12px 16px;font-size:.82rem;color:#7a5c0a;margin:0 28px 20px;display:none}
-        .incomplete-banner.show{display:block}
-
-        .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy);color:white;padding:12px 24px;border-radius:8px;font-size:.85rem;opacity:0;transition:all .25s;pointer-events:none;z-index:600}
+        .toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy);color:white;padding:10px 18px;border-radius:8px;font-size:.8rem;opacity:0;transition:all .25s;pointer-events:none;z-index:600;max-width:88vw;text-align:center}
         .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-        @media(max-width:700px){
-            .hdr{padding:0 16px}.hdr h1{font-size:.95rem}
-            .results-grid{grid-template-columns:1fr}
-            .interp-levels,.ie-grid{grid-template-columns:1fr 1fr}
-            .scale-row{grid-template-columns:1fr 1fr}
+        /* ── RESPONSIVE ── */
+        @media(max-width:600px){
+            .hdr{padding:0 12px}
+            .hdr h1{font-size:.88rem}
             .guide-steps{grid-template-columns:1fr}
-            .scale-btns{gap:4px}
+            .scale-row{grid-template-columns:1fr 1fr}
+            .scale-btns{grid-template-columns:repeat(3,1fr)}
+            .results-grid{grid-template-columns:1fr}
+            .score-legend{grid-template-columns:1fr 1fr}
+            .interp-levels{grid-template-columns:1fr 1fr}
+            .ie-grid{grid-template-columns:1fr 1fr}
+            .p-nav-btn{font-size:.66rem;padding:3px 7px}
+            .arrow-btn{padding:6px 10px;font-size:.71rem}
+        }
+        @media(max-width:360px){
+            .scale-btns{grid-template-columns:repeat(2,1fr)}
+            .interp-levels,.ie-grid{grid-template-columns:1fr}
+            .score-legend{grid-template-columns:1fr}
         }
     </style>
 </head>
 <body>
 
 <header class="hdr">
-    <div class="hdr-left">
-        <div class="hdr-icon">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-        </div>
-        <h1>Transformative Education — <em>Karolinska Institutet</em></h1>
+    <div class="hdr-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
     </div>
+    <h1>Transformative Education — <em>Karolinska Institutet</em></h1>
 </header>
 
 <div class="wrap" id="main-wrap">
 
-    <!-- ═══════════════════════════════════════ USER GUIDE ═══ -->
+    <!-- USER GUIDE -->
     <div class="card" id="guide-card">
         <div class="guide-hero">
             <h2>Transformative Education<br><em>Diagnostic Tool</em></h2>
-            <p>This self-assessment tool is designed to help educators in health professions education reflect on their teaching practices across eight principles of transformative education. It is not a performance measure — it is a compass for professional growth.</p>
+            <p>This self-assessment tool helps educators in health professions education reflect on their teaching practices across eight principles of transformative education. It is not a performance measure — it is a compass for professional growth.</p>
         </div>
         <div class="guide-steps">
-            <div class="guide-step">
-                <div class="guide-step-num">1</div>
-                <div><h4>Complete all 8 principles</h4><p>Each principle has 5 statements. Rate how often each describes your practice. Use N/A if a statement does not apply to your context.</p></div>
-            </div>
-            <div class="guide-step">
-                <div class="guide-step-num">2</div>
-                <div><h4>Be honest and reflective</h4><p>There are no right or wrong answers. The tool is most useful when you respond based on your current practice, not your aspirations.</p></div>
-            </div>
-            <div class="guide-step">
-                <div class="guide-step-num">3</div>
-                <div><h4>See your results instantly</h4><p>A radar diagram and colour-coded scores appear live as you answer. Each principle is scored 0–25.</p></div>
-            </div>
-            <div class="guide-step">
-                <div class="guide-step-num">4</div>
-                <div><h4>Interpret and act</h4><p>Use the CAN-DO statements and teaching activity examples to identify where you are and where you want to go next in your development.</p></div>
-            </div>
+            <div class="guide-step"><div class="guide-step-num">1</div><div><h4>Complete all 8 principles</h4><p>Each principle has 5 statements. Rate how often each describes your practice. Use N/A if it does not apply.</p></div></div>
+            <div class="guide-step"><div class="guide-step-num">2</div><div><h4>Be honest and reflective</h4><p>There are no right or wrong answers. Respond based on your current practice, not your aspirations.</p></div></div>
+            <div class="guide-step"><div class="guide-step-num">3</div><div><h4>Reveal your results</h4><p>After completing all 8 principles, your radar diagram and colour-coded scores are revealed.</p></div></div>
+            <div class="guide-step"><div class="guide-step-num">4</div><div><h4>Interpret and act</h4><p>Use the CAN-DO statements and teaching examples to identify where you are and where to go next.</p></div></div>
         </div>
-        <div style="padding:0 28px 10px">
-            <div style="font-size:.73rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-400);margin-bottom:10px">Score scale</div>
-        </div>
-        <div class="scale-row">
-            <div class="scale-item sc-black">
-                <div class="scale-emoji">⚫</div>
-                <div class="scale-range">0 – 10</div>
-                <div class="scale-label">Emerging</div>
-                <div class="scale-desc">Beginning to engage with this principle in your practice</div>
-            </div>
-            <div class="scale-item sc-red">
-                <div class="scale-emoji">🔴</div>
-                <div class="scale-range">11 – 15</div>
-                <div class="scale-label">Developing</div>
-                <div class="scale-desc">Growing awareness and some consistent application</div>
-            </div>
-            <div class="scale-item sc-yellow">
-                <div class="scale-emoji">🟡</div>
-                <div class="scale-range">16 – 20</div>
-                <div class="scale-label">Proficient</div>
-                <div class="scale-desc">Regularly and confidently integrating this principle</div>
-            </div>
-            <div class="scale-item sc-green">
-                <div class="scale-emoji">🟢</div>
-                <div class="scale-range">21 – 25</div>
-                <div class="scale-label">Transformative</div>
-                <div class="scale-desc">Leading and modelling transformative practice</div>
+        <div class="scale-section">
+            <div class="scale-section-label">Score scale</div>
+            <div class="scale-row">
+                <div class="scale-item sc-black"><div class="scale-emoji">⚫</div><div class="scale-range">0–10</div><div class="scale-label">Emerging</div><div class="scale-desc">Beginning to engage with this principle</div></div>
+                <div class="scale-item sc-red"><div class="scale-emoji">🔴</div><div class="scale-range">11–15</div><div class="scale-label">Developing</div><div class="scale-desc">Growing awareness and some consistent application</div></div>
+                <div class="scale-item sc-yellow"><div class="scale-emoji">🟡</div><div class="scale-range">16–20</div><div class="scale-label">Proficient</div><div class="scale-desc">Regularly and confidently integrating this principle</div></div>
+                <div class="scale-item sc-green"><div class="scale-emoji">🟢</div><div class="scale-range">21–25</div><div class="scale-label">Transformative</div><div class="scale-desc">Leading and modelling transformative practice</div></div>
             </div>
         </div>
         <div class="start-btn-wrap">
@@ -245,38 +228,45 @@
         </div>
     </div>
 
-    <!-- ═══════════════════════════════════════ QUESTIONNAIRE ═══ -->
+    <!-- QUESTIONNAIRE -->
     <div class="card" id="q-card" style="display:none">
         <div class="card-hdr">
             <div class="card-hdr-num" id="q-card-num">1</div>
-            <div><h2 id="q-card-title">Principles</h2><div class="sub" id="q-card-sub">Rate each statement from Never to Very often</div></div>
+            <div><h2 id="q-card-title">Principle</h2><div class="sub" id="q-card-sub">Rate each statement</div></div>
         </div>
+        <div class="overall-prog-bar"><div class="overall-prog-fill" id="overall-prog" style="width:0%"></div></div>
         <div class="p-nav" id="p-nav"></div>
         <div id="p-panels"></div>
     </div>
 
-    <!-- ═══════════════════════════════════════ RESULTS ═══ -->
+    <!-- RESULTS — revealed after all done -->
     <div class="card" id="results-card" style="display:none">
         <div class="card-hdr">
             <div class="card-hdr-num">●</div>
-            <div><h2>Your Results</h2><div class="sub" id="results-sub">Updates live as you answer</div></div>
-        </div>
-        <div class="incomplete-banner" id="incomplete-banner">
-            ⚠ Some principles are not yet fully answered — complete all questions for a complete picture.
+            <div><h2>Your Results</h2><div class="sub" id="results-sub">All 8 principles completed</div></div>
         </div>
         <div class="results-grid">
             <div class="results-chart-wrap">
-                <canvas id="radar-canvas" width="340" height="340"></canvas>
+                <canvas id="radar-canvas" width="290" height="290"></canvas>
             </div>
             <div class="results-list" id="results-list"></div>
         </div>
+        <div class="score-legend-wrap">
+            <div class="score-legend-label">Score scale</div>
+            <div class="score-legend">
+                <div class="sl-item sc-black"><span class="sl-emoji">⚫</span><div><div class="sl-range">0–10</div><div class="sl-label">Emerging</div></div></div>
+                <div class="sl-item sc-red"><span class="sl-emoji">🔴</span><div><div class="sl-range">11–15</div><div class="sl-label">Developing</div></div></div>
+                <div class="sl-item sc-yellow"><span class="sl-emoji">🟡</span><div><div class="sl-range">16–20</div><div class="sl-label">Proficient</div></div></div>
+                <div class="sl-item sc-green"><span class="sl-emoji">🟢</span><div><div class="sl-range">21–25</div><div class="sl-label">Transformative</div></div></div>
+            </div>
+        </div>
     </div>
 
-    <!-- ═══════════════════════════════════════ INTERPRET ═══ -->
+    <!-- INTERPRET — revealed after all done -->
     <div class="card" id="interpret-card" style="display:none">
         <div class="card-hdr">
             <div class="card-hdr-num">↗</div>
-            <div><h2>Interpret Your Results</h2><div class="sub">CAN-DO statements and teaching activity examples for each principle</div></div>
+            <div><h2>Interpret Your Results</h2><div class="sub">CAN-DO statements and teaching activity examples</div></div>
         </div>
         <div class="interpret-wrap" id="interpret-wrap"></div>
     </div>
@@ -291,285 +281,122 @@
 <div class="toast" id="toast"></div>
 
 <script>
-    // ══════════════════════════════════════════════════════════════════
-    // DATA
-    // ══════════════════════════════════════════════════════════════════
     const PRINCIPLES = [
         {
-            short: "Inclusive Behaviours",
-            title: "Principle 1 — Promoting inclusive behaviours in teaching and learning",
-            desc: "…leads to transformative cultural and ethical learning, enhanced by and appropriate for the diversity of the academic community, clinical settings, and society at large.",
-            questions: [
-                "I create a safe and inclusive environment for discussing sensitive topics in your educational sessions",
-                "I model inclusive language and strive for respect in discussions",
-                "I intentionally ensure inclusion of diverse voices and perspectives",
-                "I model vulnerability, sensitivity and respect in addressing complex and ambiguous topics",
-                "I embrace a facilitator role, rather than being an information provider"
-            ],
-            cando: [
-                "I can help others gain awareness of others and develop their ability to recognize others as similarly complex cultural beings.",
-                "I can promote a collaborative approach, based on equity and inclusion.",
-                "I can promote inclusive behaviour and can challenge exoticism, stereotypes, and misinformation directly.",
-                "I can promote intercultural engagement and effective intercultural relations in my learning environments."
-            ],
-            examples: [
-                "Reflecting on how a student's cultural beliefs, values, and assumptions shape understanding of health or ill health.",
-                "Discussing past healthcare practice(s) and how to address any lack of inclusivity.",
-                "Collaborating across professions to design an action-oriented guide to perform home visits to pregnant women and their infants in local/indigenous communities.",
-                "Discussing how intersecting identities impact on power dynamics and experiences in health care systems, proposing solutions and good practices."
-            ]
+            short:"Inclusive Behaviours",
+            title:"Principle 1 — Promoting inclusive behaviours in teaching and learning",
+            desc:"…leads to transformative cultural and ethical learning, enhanced by and appropriate for the diversity of the academic community, clinical settings, and society at large.",
+            questions:["I create a safe and inclusive environment for discussing sensitive topics in your educational sessions","I model inclusive language and strive for respect in discussions","I intentionally ensure inclusion of diverse voices and perspectives","I model vulnerability, sensitivity and respect in addressing complex and ambiguous topics","I embrace a facilitator role, rather than being an information provider"],
+            cando:["I can help others gain awareness of others and develop their ability to recognize others as similarly complex cultural beings.","I can promote a collaborative approach, based on equity and inclusion.","I can promote inclusive behaviour and can challenge exoticism, stereotypes, and misinformation directly.","I can promote intercultural engagement and effective intercultural relations in my learning environments."],
+            examples:["Reflecting on how a student's cultural beliefs, values, and assumptions shape understanding of health or ill health.","Discussing past healthcare practice(s) and how to address any lack of inclusivity.","Collaborating across professions to design an action-oriented guide to perform home visits to pregnant women and their infants in local/indigenous communities.","Discussing how intersecting identities impact on power dynamics and experiences in health care systems, proposing solutions and good practices."]
         },
         {
-            short: "Learner-Centred Pedagogies",
-            title: "Principle 2 — Developing and facilitating learner-centred pedagogies",
-            desc: "…recognises and values students' diverse educational, linguistic, and cultural resources and accommodates the distinct learning needs of all students.",
-            questions: [
-                "I design activities and assess competence in collaboration and teamwork",
-                "I empower learners to take ownership of their learning processes and goals",
-                "I experiment with new teaching methods and approaches, even if they are unfamiliar or uncomfortable",
-                "I adapt teaching methods to accommodate diverse learner needs and preferences",
-                "I provide timely and constructive feedback to support learners' growth and development"
-            ],
-            cando: [
-                "I can encourage students to engage with the material at a deep level, develop a dialogue, and reflect on their progress.",
-                "I can encourage students to reflect on what they are learning, how they are learning it, and acknowledge the classroom as a learning community.",
-                "I can develop approaches or strategies based on learner-centred pedagogies that recognize and value students' diverse educational, linguistic, and cultural backgrounds.",
-                "I can design and facilitate teaching and learning in an interactive, learner-centred way that enables exploratory, action oriented and transformative learning."
-            ],
-            examples: [
-                "Analysing how norms, beliefs and values shape their worldviews and the knowledge they accept as truth.",
-                "Co-designing assignments and rubrics for assessment with your students.",
-                "Group project work on how healthcare should be given to cater for patients of diverse linguistic and cultural backgrounds.",
-                "Examine narratives of healthcare to see which voices are missing — for example, how healthcare intersects with gender equality and immigration."
-            ]
+            short:"Learner-Centred Pedagogies",
+            title:"Principle 2 — Developing and facilitating learner-centred pedagogies",
+            desc:"…recognises and values students' diverse educational, linguistic, and cultural resources and accommodates the distinct learning needs of all students.",
+            questions:["I design activities and assess competence in collaboration and teamwork","I empower learners to take ownership of their learning processes and goals","I experiment with new teaching methods and approaches, even if they are unfamiliar or uncomfortable","I adapt teaching methods to accommodate diverse learner needs and preferences","I provide timely and constructive feedback to support learners' growth and development"],
+            cando:["I can encourage students to engage with the material at a deep level, develop a dialogue, and reflect on their progress.","I can encourage students to reflect on what they are learning, how they are learning it, and acknowledge the classroom as a learning community.","I can develop approaches or strategies based on learner-centred pedagogies that recognize and value students' diverse educational, linguistic, and cultural backgrounds.","I can design and facilitate teaching and learning in an interactive, learner-centred way that enables exploratory, action oriented and transformative learning."],
+            examples:["Analysing how norms, beliefs and values shape their worldviews and the knowledge they accept as truth.","Co-designing assignments and rubrics for assessment with your students.","Group project work on how healthcare should be given to cater for patients of diverse linguistic and cultural backgrounds.","Examine narratives of healthcare to see which voices are missing — for example, how healthcare intersects with gender equality and immigration."]
         },
         {
-            short: "Cultural & Interprofessional Engagement",
-            title: "Principle 3 — Promoting effective cultural and interprofessional engagement",
-            desc: "…supports the transformation of experiences toward cultural learning and personal development through collaborative dialogue, underpinned by empathy, equity, and sensitivity to diversity.",
-            questions: [
-                "I design activities for and assess competences in critical reflection",
-                "I design activities that explicitly encourage an appreciation for diverse experiences",
-                "I unlearn and relearn about the history and cultural impact of my discipline",
-                "I transform challenging moments or critical incidents into valuable learning experiences",
-                "I facilitate difficult conversations and correct misconceptions"
-            ],
-            cando: [
-                "I can view and interpret the world from other cultural and professional points of view and identify my own.",
-                "I can tolerate ambiguity when responding to new, uncertain, and unpredictable intercultural and interprofessional encounters and adapt my behaviour.",
-                "I can develop awareness and sensitivity to others' feelings and emotions and how these are expressed across cultures.",
-                "I can accept and model the relativity of my own ways of seeing, thinking, and doing."
-            ],
-            examples: [
-                "Researching and interpreting healthcare provider-patient relations from across the world and different professions.",
-                "Role-playing scenarios when responding to new, uncertain, and unpredictable medical cases.",
-                "Reflecting on patients' feelings and emotions, and how these are expressed across cultures, when delivering a medical diagnosis.",
-                "Discussing scenarios of how patients' realities, clinicians' mental models, and healthcare records can misalign to produce distortions in comprehension and treatment."
-            ]
+            short:"Cultural & Interprofessional Engagement",
+            title:"Principle 3 — Promoting effective cultural and interprofessional engagement",
+            desc:"…supports the transformation of experiences toward cultural learning and personal development through collaborative dialogue, underpinned by empathy, equity, and sensitivity to diversity.",
+            questions:["I design activities for and assess competences in critical reflection","I design activities that explicitly encourage an appreciation for diverse experiences","I unlearn and relearn about the history and cultural impact of my discipline","I transform challenging moments or critical incidents into valuable learning experiences","I facilitate difficult conversations and correct misconceptions"],
+            cando:["I can view and interpret the world from other cultural and professional points of view and identify my own.","I can tolerate ambiguity when responding to new, uncertain, and unpredictable intercultural and interprofessional encounters and adapt my behaviour.","I can develop awareness and sensitivity to others' feelings and emotions and how these are expressed across cultures.","I can accept and model the relativity of my own ways of seeing, thinking, and doing."],
+            examples:["Researching and interpreting healthcare provider-patient relations from across the world and different professions.","Role-playing scenarios when responding to new, uncertain, and unpredictable medical cases.","Reflecting on patients' feelings and emotions, and how these are expressed across cultures, when delivering a medical diagnosis.","Discussing scenarios of how patients' realities, clinicians' mental models, and healthcare records can misalign to produce distortions in comprehension and treatment."]
         },
         {
-            short: "Glocal Learning Experience",
-            title: "Principle 4 — Enabling and embedding a glocal (global + local) learning experience",
-            desc: "…is informed by systems thinking and/or knowledge perspectives across geographies, income levels, professions, cultures, languages, and borders.",
-            questions: [
-                "I promote understanding of diverse cultural practices and beliefs in healthcare",
-                "I design activities for learners to consider both global and local contexts in their problem-solving",
-                "I integrate global perspectives into your teaching practices",
-                "I facilitate interactions and collaborations across different cultures and geographies",
-                "I address global health issues and your local implications"
-            ],
-            cando: [
-                "I can engage with global issues and relate them to their impact on my local context.",
-                "I can understand the connection between my own personal and professional behaviours and their impact on global systems.",
-                "I can develop behavioural capacities to act collaboratively and responsibly to find glocal solutions for glocal challenges and to strive for the collective good.",
-                "I can identify glocal issues related to diversity and identity, social justice and equity, globalisation and interdependence, sustainable development, peace and conflict, human rights, power and governance in relation to my discipline and context."
-            ],
-            examples: [
-                "Reflecting on how global healthcare delivery norms and standards impact on the provision of healthcare locally.",
-                "Connecting personal and professional behaviours and their impact on global health systems and healthcare practices.",
-                "Finding glocal solutions to tuberculosis control through SDG1 and SDG10, or antibiotic resistance through SDG3.",
-                "Formulating recommendations for medical professionals to think and act critically about how white male bodies are positioned as the norm."
-            ]
+            short:"Glocal Learning Experience",
+            title:"Principle 4 — Enabling and embedding a glocal (global + local) learning experience",
+            desc:"…is informed by systems thinking and/or knowledge perspectives across geographies, income levels, professions, cultures, languages, and borders.",
+            questions:["I promote understanding of diverse cultural practices and beliefs in healthcare","I design activities for learners to consider both global and local contexts in their problem-solving","I integrate global perspectives into your teaching practices","I facilitate interactions and collaborations across different cultures and geographies","I address global health issues and your local implications"],
+            cando:["I can engage with global issues and relate them to their impact on my local context.","I can understand the connection between my own personal and professional behaviours and their impact on global systems.","I can develop behavioural capacities to act collaboratively and responsibly to find glocal solutions for glocal challenges and to strive for the collective good.","I can identify glocal issues related to diversity and identity, social justice and equity, globalisation and interdependence, sustainable development, peace and conflict, human rights, power and governance in relation to my discipline and context."],
+            examples:["Reflecting on how global healthcare delivery norms and standards impact on the provision of healthcare locally.","Connecting personal and professional behaviours and their impact on global health systems and healthcare practices.","Finding glocal solutions to tuberculosis control through SDG1 and SDG10, or antibiotic resistance through SDG3.","Formulating recommendations for medical professionals to think and act critically about how white male bodies are positioned as the norm."]
         },
         {
-            short: "Social & Ethical Responsibility",
-            title: "Principle 5 — Integrating social and ethical responsibility in teaching and learning",
-            desc: "…by valuing social responsibility and public good through addressing glocal sustainability issues and inequalities related to the healthcare disciplines, considering their impact on cultures, society and a sustainable future.",
-            questions: [
-                "I ground conversations in principles of human rights",
-                "I design activities for critical thinking about social and ethical issues",
-                "I address sustainability and inequity relevant to healthcare",
-                "I actively work on improving my educational practices to reflect social responsibility",
-                "I evaluate how my actions may reinforce power dynamics within my teaching"
-            ],
-            cando: [
-                "I can understand the role ethics and social responsibility play in my discipline.",
-                "I can integrate ethical knowledge and skills to my teaching and highlight relevant social issues related to my discipline.",
-                "I can engage with social and ethical perspectives and concepts to my discipline and consider their implications fully.",
-                "I can integrate complex social and ethical issues when presented in a multidisciplinary context and identify cross-relationships among different health issues."
-            ],
-            examples: [
-                "Discussing in pairs a healthcare case and stating the objections to, assumptions and implications of different ethical perspectives.",
-                "Evaluating healthcare cases about what is right, and in the patient's best interests, along with making decisions about what needs to be done in a specific situation.",
-                "Synthesizing other perspectives (such as cultural, social, disciplinary, and ethical) when investigating subjects within healthcare research.",
-                "Working in groups to investigate multidisciplinary treatment models and compare the ethical standards of different professions regarding patient confidentiality."
-            ]
+            short:"Social & Ethical Responsibility",
+            title:"Principle 5 — Integrating social and ethical responsibility in teaching and learning",
+            desc:"…by valuing social responsibility and public good through addressing glocal sustainability issues and inequalities related to the healthcare disciplines, considering their impact on cultures, society and a sustainable future.",
+            questions:["I ground conversations in principles of human rights","I design activities for critical thinking about social and ethical issues","I address sustainability and inequity relevant to healthcare","I actively work on improving my educational practices to reflect social responsibility","I evaluate how my actions may reinforce power dynamics within my teaching"],
+            cando:["I can understand the role ethics and social responsibility play in my discipline.","I can integrate ethical knowledge and skills to my teaching and highlight relevant social issues related to my discipline.","I can engage with social and ethical perspectives and concepts to my discipline and consider their implications fully.","I can integrate complex social and ethical issues when presented in a multidisciplinary context and identify cross-relationships among different health issues."],
+            examples:["Discussing in pairs a healthcare case and stating the objections to, assumptions and implications of different ethical perspectives.","Evaluating healthcare cases about what is right, and in the patient's best interests, along with making decisions about what needs to be done.","Synthesizing other perspectives (such as cultural, social, disciplinary, and ethical) when investigating subjects within healthcare research.","Working in groups to investigate multidisciplinary treatment models and compare the ethical standards of different professions regarding patient confidentiality."]
         },
         {
-            short: "Interdisciplinary Learning",
-            title: "Principle 6 — Integrating learning from different disciplinary contexts",
-            desc: "…by promoting learning through different ways of seeing, thinking, and doing across disciplines, professions, and cultures.",
-            questions: [
-                "I design activities for and assess competences in collaboration and teamwork across disciplines",
-                "I promote problem-solving skills that intentionally draw on diverse disciplinary perspectives",
-                "I adapt teaching methods, including assessments, to accommodate diverse learner needs and preferences",
-                "I address individual learner needs and provide support as needed",
-                "I foster an environment where different ways of thinking, seeing, and doing are valued and through persons that are different to oneself"
-            ],
-            cando: [
-                "I can describe ethical, social, and environmental challenges in global systems and evaluate the local and broader consequences of individual and collective healthcare interventions.",
-                "I can address diverse perspectives to healthcare systems in the face of multiple and even conflicting positions (i.e., cultural, disciplinary, and ethical).",
-                "I can apply knowledge and skills to implement sophisticated, appropriate, and workable solutions to address complex global problems using interdisciplinary perspectives.",
-                "I can apply deep knowledge of the historic and contemporary role and differential effects of human organisations and actions on global systems to develop and advocate for informed, appropriate action to solve complex health problems."
-            ],
-            examples: [
-                "Analysing and explaining the impact of culture on certain health behaviours, including the assumptions, biases, prejudices, and stereotypes that are made.",
-                "Simulating treatment options to patients from diverse linguistic and cultural backgrounds and analysing them through the lens of cultural humility.",
-                "Analysing the concept of health as a Human Right and its implications for countries at different income levels through the lens of the SDGs.",
-                "Addressing the ethical, social, and environmental challenges in Global Health and evaluating the local and broader consequences of individual and collective interventions."
-            ]
+            short:"Interdisciplinary Learning",
+            title:"Principle 6 — Integrating learning from different disciplinary contexts",
+            desc:"…by promoting learning through different ways of seeing, thinking, and doing across disciplines, professions, and cultures.",
+            questions:["I design activities for and assess competences in collaboration and teamwork across disciplines","I promote problem-solving skills that intentionally draw on diverse disciplinary perspectives","I adapt teaching methods, including assessments, to accommodate diverse learner needs and preferences","I address individual learner needs and provide support as needed","I foster an environment where different ways of thinking, seeing, and doing are valued and through persons that are different to oneself"],
+            cando:["I can describe ethical, social, and environmental challenges in global systems and evaluate the local and broader consequences of individual and collective healthcare interventions.","I can address diverse perspectives to healthcare systems in the face of multiple and even conflicting positions (i.e., cultural, disciplinary, and ethical).","I can apply knowledge and skills to implement sophisticated, appropriate, and workable solutions to address complex global problems using interdisciplinary perspectives.","I can apply deep knowledge of the historic and contemporary role and differential effects of human organisations and actions on global systems to advocate for informed, appropriate action to solve complex health problems."],
+            examples:["Analysing and explaining the impact of culture on certain health behaviours, including the assumptions, biases, prejudices, and stereotypes that are made.","Simulating treatment options to patients from diverse linguistic and cultural backgrounds and analysing them through the lens of cultural humility.","Analysing the concept of health as a Human Right and its implications for countries at different income levels through the lens of the SDGs.","Addressing the ethical, social, and environmental challenges in Global Health and evaluating the local and broader consequences of individual and collective interventions."]
         },
         {
-            short: "Creative Thinking & Knowledge",
-            title: "Principle 7 — Integrating creative thinking, knowledge creation and knowledge exchange",
-            desc: "…within and across local and global communities, including availability, accessibility, acceptability, and quality, the Right to Health, and human rights.",
-            questions: [
-                "I develop approaches that seed complex thinking, leave room for uncertainty, confront values, and require problem-solving",
-                "I design activities for and assess competences in problem-solving skills and innovative thinking",
-                "I centre learner perspectives by involving them in course design, course evaluation and decision-making processes",
-                "I intentionally include diverse voices, including those of historically marginalized groups, in my teaching",
-                "I offer course materials that embrace diverse identities, perspectives, and historical contexts beyond the Eurocentric lens"
-            ],
-            cando: [
-                "I can integrate some creative thinking, knowledge creation and knowledge exchange in my teaching.",
-                "I can ensure reciprocity by mutually generating and exchanging knowledge, ideas and resources within and across cultural and intellectual traditions.",
-                "I can demonstrate understanding of fundamental concepts and methods that produce knowledge about plural societies and systems of classification.",
-                "I can use comparative, intersectional, or relational frameworks to examine the experiences, cultures, or histories of two or more cultural groups within a single society or across societies."
-            ],
-            examples: [
-                "Identifying cultural, gender, or other stereotypes in healthcare and how they impact quality.",
-                "Reflecting on medical cases and their treatment in different cultural settings and in low-, middle-, and high-income countries.",
-                "Identifying social or institutional structures or ideologies that create or disrupt hierarchies at play within healthcare systems.",
-                "Analysing a complex health issue using an intersectional lens to see how the social determinants of health interact with individual identities, and identify the structural factors that influence these identities."
-            ]
+            short:"Creative Thinking & Knowledge",
+            title:"Principle 7 — Integrating creative thinking, knowledge creation and knowledge exchange",
+            desc:"…within and across local and global communities, including availability, accessibility, acceptability, and quality, the Right to Health, and human rights.",
+            questions:["I develop approaches that seed complex thinking, leave room for uncertainty, confront values, and require problem-solving","I design activities for and assess competences in problem-solving skills and innovative thinking","I centre learner perspectives by involving them in course design, course evaluation and decision-making processes","I intentionally include diverse voices, including those of historically marginalized groups, in my teaching","I offer course materials that embrace diverse identities, perspectives, and historical contexts beyond the Eurocentric lens"],
+            cando:["I can integrate some creative thinking, knowledge creation and knowledge exchange in my teaching.","I can ensure reciprocity by mutually generating and exchanging knowledge, ideas and resources within and across cultural and intellectual traditions.","I can demonstrate understanding of fundamental concepts and methods that produce knowledge about plural societies and systems of classification.","I can use comparative, intersectional, or relational frameworks to examine the experiences, cultures, or histories of two or more cultural groups within a single society or across societies."],
+            examples:["Identifying cultural, gender, or other stereotypes in healthcare and how they impact quality.","Reflecting on medical cases and their treatment in different cultural settings and in low-, middle-, and high-income countries.","Identifying social or institutional structures or ideologies that create or disrupt hierarchies at play within healthcare systems.","Analysing a complex health issue using an intersectional lens to see how the social determinants of health interact with individual identities, and identify the structural factors that influence these identities."]
         },
         {
-            short: "Critical Self-Reflection",
-            title: "Principle 8 — Engaging in critical self-reflection and continuous learning",
-            desc: "…through the evaluation of teaching practices and self-reflection, through continuous professional development, through collegial discussion, and through scholarship of teaching and learning.",
-            questions: [
-                "I reflect on own practice regularly to identify areas for improvement",
-                "I challenge own personal biases and assumptions",
-                "I actively engage in developing self-awareness and understanding its impact on learners",
-                "I promote recognition of the importance of lifelong learning and continuous professional development",
-                "I seek and incorporate feedback from learners and peers to improve teaching practices"
-            ],
-            cando: [
-                "I dedicate little time for reflection and professional development of my teaching practices.",
-                "I sometimes take part in the professional development activities offered to me.",
-                "I regularly engage in professional development activities, reflect on my teaching (by seeking feedback from a critical friend, for example), and read the scholarship of teaching and learning.",
-                "I actively seek feedback from colleagues and students, contribute to the scholarship of teaching and learning, and adopt transformative teaching practices."
-            ],
-            examples: [
-                "Reflecting individually or with a peer on a recent teaching experience and identifying one specific change to try next time.",
-                "Taking part in professional development activities offered by your institution's teaching unit.",
-                "Reading the scholarship of teaching and learning and applying insights to your own course design.",
-                "Contributing to teaching and learning research, mentoring colleagues, and systematically embedding transformative practices across your programme."
-            ],
-            pdLinks: [
-                { label: "Integrating Agenda 2030 into education at KI", url: "https://staff.ki.se/integrating-agenda-2030-into-education-at-ki" },
-                { label: "Teaching and Learning resources at KI", url: "https://staff.ki.se/teaching-and-learning" }
+            short:"Critical Self-Reflection",
+            title:"Principle 8 — Engaging in critical self-reflection and continuous learning",
+            desc:"…through the evaluation of teaching practices and self-reflection, through continuous professional development, through collegial discussion, and through scholarship of teaching and learning.",
+            questions:["I reflect on own practice regularly to identify areas for improvement","I challenge own personal biases and assumptions","I actively engage in developing self-awareness and understanding its impact on learners","I promote recognition of the importance of lifelong learning and continuous professional development","I seek and incorporate feedback from learners and peers to improve teaching practices"],
+            cando:["I dedicate little time for reflection and professional development of my teaching practices.","I sometimes take part in the professional development activities offered to me.","I regularly engage in professional development activities, reflect on my teaching (by seeking feedback from a critical friend, for example), and read the scholarship of teaching and learning.","I actively seek feedback from colleagues and students, contribute to the scholarship of teaching and learning, and adopt transformative teaching practices."],
+            examples:["Reflecting individually or with a peer on a recent teaching experience and identifying one specific change to try next time.","Taking part in professional development activities offered by your institution's teaching unit.","Reading the scholarship of teaching and learning and applying insights to your own course design.","Contributing to teaching and learning research, mentoring colleagues, and systematically embedding transformative practices across your programme."],
+            pdLinks:[
+                {label:"Integrating Agenda 2030 into education at KI",url:"https://staff.ki.se/integrating-agenda-2030-into-education-at-ki"},
+                {label:"Teaching and Learning resources at KI",url:"https://staff.ki.se/teaching-and-learning"}
             ]
         }
     ];
 
     const SCALE_LABELS = ["Never","Rarely","Occasionally","Often","Very often","N/A"];
     const LEVEL_DATA = [
-        { key:"black", emoji:"⚫", min:0,  max:10,  label:"Emerging",       cls:"sc-black", color:"#888" },
-        { key:"red",   emoji:"🔴", min:11, max:15,  label:"Developing",     cls:"sc-red",   color:"#C0392B" },
-        { key:"yellow",emoji:"🟡", min:16, max:20,  label:"Proficient",     cls:"sc-yellow",color:"#D4A017" },
-        { key:"green", emoji:"🟢", min:21, max:25,  label:"Transformative", cls:"sc-green", color:"#1a7a4a" }
+        {key:"black",emoji:"⚫",min:0, max:10, label:"Emerging",      cls:"sc-black",color:"#888"},
+        {key:"red",  emoji:"🔴",min:11,max:15, label:"Developing",    cls:"sc-red",  color:"#C0392B"},
+        {key:"yellow",emoji:"🟡",min:16,max:20,label:"Proficient",    cls:"sc-yellow",color:"#D4A017"},
+        {key:"green",emoji:"🟢",min:21,max:25, label:"Transformative",cls:"sc-green",color:"#1a7a4a"}
     ];
+    const LV_KEYS = ["black","red","yellow","green"];
 
-    function getLevel(score) {
-        return LEVEL_DATA.find(l => score >= l.min && score <= l.max) || LEVEL_DATA[0];
-    }
+    function getLevel(s){ return LEVEL_DATA.find(l=>s>=l.min&&s<=l.max)||LEVEL_DATA[0]; }
 
-    // ══════════════════════════════════════════════════════════════════
-    // STATE
-    // ══════════════════════════════════════════════════════════════════
-    // answers[pi][qi] = 1-5 or 6 (N/A) or 0 (unanswered)
-    const answers = PRINCIPLES.map(p => p.questions.map(() => 0));
+    const answers = PRINCIPLES.map(p=>p.questions.map(()=>0));
     let currentP = 0;
 
-    // ══════════════════════════════════════════════════════════════════
-    // INIT
-    // ══════════════════════════════════════════════════════════════════
-    function startTool() {
-        document.getElementById('guide-card').style.display = 'none';
-        document.getElementById('q-card').style.display = 'block';
-        document.getElementById('results-card').style.display = 'block';
-        document.getElementById('interpret-card').style.display = 'block';
-        document.getElementById('restart-card').style.display = 'block';
-        buildNav();
-        buildPanels();
-        showPrinciple(0);
-        initChart();
-        renderResults();
-        renderInterpret();
+    function startTool(){
+        document.getElementById('guide-card').style.display='none';
+        document.getElementById('q-card').style.display='block';
+        buildNav(); buildPanels(); showPrinciple(0);
     }
 
-    // ══════════════════════════════════════════════════════════════════
-    // NAV
-    // ══════════════════════════════════════════════════════════════════
-    function buildNav() {
-        const nav = document.getElementById('p-nav');
-        nav.innerHTML = PRINCIPLES.map((p,i) =>
-            `<button class="p-nav-btn" id="nav-${i}" onclick="showPrinciple(${i})">
-      <span class="dot"></span>P${i+1}
-    </button>`
+    function buildNav(){
+        document.getElementById('p-nav').innerHTML=PRINCIPLES.map((_,i)=>
+            `<button class="p-nav-btn" id="nav-${i}" onclick="showPrinciple(${i})"><span class="dot"></span>P${i+1}</button>`
         ).join('');
     }
 
-    function updateNav() {
-        PRINCIPLES.forEach((p,i) => {
-            const btn = document.getElementById(`nav-${i}`);
-            const done = answers[i].every(a => a > 0);
-            btn.className = `p-nav-btn${i===currentP?' active':''}${done?' done':''}`;
-            btn.innerHTML = `<span class="dot"></span>P${i+1}`;
+    function updateNav(){
+        PRINCIPLES.forEach((_,i)=>{
+            const btn=document.getElementById(`nav-${i}`);
+            const done=answers[i].every(a=>a>0);
+            btn.className=`p-nav-btn${i===currentP?' active':''}${done?' done':''}`;
+            btn.innerHTML=`<span class="dot"></span>P${i+1}`;
         });
     }
 
-    // ══════════════════════════════════════════════════════════════════
-    // PANELS
-    // ══════════════════════════════════════════════════════════════════
-    function buildPanels() {
-        const wrap = document.getElementById('p-panels');
-        wrap.innerHTML = PRINCIPLES.map((p,pi) => `
+    function buildPanels(){
+        document.getElementById('p-panels').innerHTML=PRINCIPLES.map((p,pi)=>`
     <div class="p-panel" id="panel-${pi}">
-      <div class="p-title">
-        <h3>${p.title}</h3>
-        <p>${p.desc}</p>
-      </div>
+      <div class="p-title"><h3>${p.title}</h3><p>${p.desc}</p></div>
       <div class="questions">
-        ${p.questions.map((q,qi) => `
+        ${p.questions.map((q,qi)=>`
         <div class="q-block" id="qb-${pi}-${qi}">
           <div class="q-text"><span class="q-num">Q${qi+1}</span>${q}</div>
           <div class="scale-btns">
-            ${SCALE_LABELS.map((lb,vi) =>
-            `<button class="scale-btn" id="sb-${pi}-${qi}-${vi+1}"
-                onclick="setAnswer(${pi},${qi},${vi+1})">${lb}</button>`
-        ).join('')}
+            ${SCALE_LABELS.map((lb,vi)=>`<button class="scale-btn" id="sb-${pi}-${qi}-${vi+1}" onclick="setAnswer(${pi},${qi},${vi+1})">${lb}</button>`).join('')}
           </div>
         </div>`).join('')}
       </div>
@@ -577,129 +404,79 @@
         <div class="p-prog"><div class="p-prog-fill" id="prog-${pi}" style="width:0%"></div></div>
         <div class="p-prog-label" id="prog-label-${pi}">0 / 5</div>
         <div class="p-nav-arrows">
-          ${pi > 0 ? `<button class="arrow-btn" onclick="showPrinciple(${pi-1})">← Back</button>` : ''}
-          ${pi < PRINCIPLES.length-1
-            ? `<button class="arrow-btn primary" onclick="showPrinciple(${pi+1})">Next →</button>`
-            : `<button class="arrow-btn primary" onclick="scrollToResults()">See results ↓</button>`}
+          ${pi>0?`<button class="arrow-btn" onclick="showPrinciple(${pi-1})">← Back</button>`:''}
+          ${pi<PRINCIPLES.length-1
+            ?`<button class="arrow-btn primary" onclick="showPrinciple(${pi+1})">Next →</button>`
+            :`<button class="arrow-btn primary" onclick="showResults()">See results ↓</button>`}
         </div>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
     }
 
-    function showPrinciple(i) {
-        currentP = i;
-        document.querySelectorAll('.p-panel').forEach(p => p.classList.remove('active'));
+    function showPrinciple(i){
+        currentP=i;
+        document.querySelectorAll('.p-panel').forEach(p=>p.classList.remove('active'));
         document.getElementById(`panel-${i}`).classList.add('active');
-        document.getElementById('q-card-num').textContent = i+1;
-        document.getElementById('q-card-title').textContent = `Principle ${i+1}`;
-        document.getElementById('q-card-sub').textContent = PRINCIPLES[i].short;
+        document.getElementById('q-card-num').textContent=i+1;
+        document.getElementById('q-card-title').textContent=`Principle ${i+1}`;
+        document.getElementById('q-card-sub').textContent=PRINCIPLES[i].short;
         updateNav();
     }
 
-    // ══════════════════════════════════════════════════════════════════
-    // ANSWERS
-    // ══════════════════════════════════════════════════════════════════
-    function setAnswer(pi, qi, val) {
-        answers[pi][qi] = val;
-        // update buttons
-        for (let v=1;v<=6;v++) {
-            const btn = document.getElementById(`sb-${pi}-${qi}-${v}`);
-            if (btn) { btn.className = `scale-btn${answers[pi][qi]===v?' sel-'+v:''}`; }
+    function setAnswer(pi,qi,val){
+        answers[pi][qi]=val;
+        for(let v=1;v<=6;v++){
+            const b=document.getElementById(`sb-${pi}-${qi}-${v}`);
+            if(b) b.className=`scale-btn${answers[pi][qi]===v?' sel-'+v:''}`;
         }
-        // update block border
-        const qb = document.getElementById(`qb-${pi}-${qi}`);
-        if (qb) qb.className = `q-block${val>0?' answered':''}`;
-        // update progress bar
-        updateProgress(pi);
+        const qb=document.getElementById(`qb-${pi}-${qi}`);
+        if(qb) qb.className=`q-block${val>0?' answered':''}`;
+        const done=answers[pi].filter(a=>a>0).length;
+        const bar=document.getElementById(`prog-${pi}`);
+        const lbl=document.getElementById(`prog-label-${pi}`);
+        if(bar) bar.style.width=(done/PRINCIPLES[pi].questions.length*100)+'%';
+        if(lbl) lbl.textContent=`${done} / ${PRINCIPLES[pi].questions.length}`;
+        const total=answers.flat().filter(a=>a>0).length;
+        const op=document.getElementById('overall-prog');
+        if(op) op.style.width=(total/(PRINCIPLES.length*5)*100)+'%';
         updateNav();
-        renderResults();
-        renderInterpret();
     }
 
-    function updateProgress(pi) {
-        const done = answers[pi].filter(a=>a>0).length;
-        const pct  = done / PRINCIPLES[pi].questions.length * 100;
-        const bar  = document.getElementById(`prog-${pi}`);
-        const lbl  = document.getElementById(`prog-label-${pi}`);
-        if (bar) bar.style.width = pct+'%';
-        if (lbl) lbl.textContent = `${done} / ${PRINCIPLES[pi].questions.length}`;
-    }
+    function scoreFor(pi)   { return answers[pi].reduce((s,a)=>s+(a===6?0:a),0); }
+    function naCountFor(pi) { return answers[pi].filter(a=>a===6).length; }
+    function answeredFor(pi){ return answers[pi].filter(a=>a>0).length; }
 
-    // ══════════════════════════════════════════════════════════════════
-    // SCORING
-    // ══════════════════════════════════════════════════════════════════
-    function scoreFor(pi) {
-        return answers[pi].reduce((s,a) => s + (a===6?0:a), 0);
-    }
-    function naCountFor(pi) {
-        return answers[pi].filter(a=>a===6).length;
-    }
-    function answeredFor(pi) {
-        return answers[pi].filter(a=>a>0).length;
-    }
+    function showResults(){
+        const missing=PRINCIPLES.filter((_,i)=>answeredFor(i)<PRINCIPLES[i].questions.length).map((_,i)=>`P${i+1}`);
+        if(missing.length){ showToast(`⚠ Please complete: ${missing.join(', ')}`); return; }
 
-    // ══════════════════════════════════════════════════════════════════
-    // CHART
-    // ══════════════════════════════════════════════════════════════════
-    let radarChart;
-    function initChart() {
-        const ctx = document.getElementById('radar-canvas').getContext('2d');
-        radarChart = new Chart(ctx, {
-            type: 'radar',
-            data: {
-                labels: PRINCIPLES.map((_,i) => `P${i+1}`),
-                datasets: [{
-                    label: 'Your score',
-                    data: new Array(8).fill(0),
-                    backgroundColor: 'rgba(0,109,119,.15)',
-                    borderColor: '#006D77',
-                    borderWidth: 2.5,
-                    pointBackgroundColor: '#006D77',
-                    pointRadius: 4,
-                }]
+        // Radar chart
+        new Chart(document.getElementById('radar-canvas').getContext('2d'),{
+            type:'radar',
+            data:{
+                labels:PRINCIPLES.map((_,i)=>`P${i+1}`),
+                datasets:[{label:'Your score',data:PRINCIPLES.map((_,i)=>scoreFor(i)),
+                    backgroundColor:'rgba(0,109,119,.15)',borderColor:'#006D77',borderWidth:2.5,
+                    pointBackgroundColor:'#006D77',pointRadius:4}]
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                scales: {
-                    r: {
-                        min: 0, max: 25,
-                        ticks: { stepSize: 5, font:{size:10}, color:'#8C94A6', backdropColor:'transparent' },
-                        grid: { color:'rgba(0,0,0,.08)' },
-                        pointLabels: { font:{size:11,family:"'DM Sans',sans-serif"}, color:'#0d2137' },
-                        angleLines: { color:'rgba(0,0,0,.08)' }
-                    }
-                },
-                plugins: { legend:{display:false}, tooltip:{
-                        callbacks:{ label: ctx => ` Score: ${ctx.raw} / 25` }
-                    }}
-            }
+            options:{responsive:true,maintainAspectRatio:true,
+                scales:{r:{min:0,max:25,ticks:{stepSize:5,font:{size:10},color:'#8C94A6',backdropColor:'transparent'},
+                        grid:{color:'rgba(0,0,0,.08)'},pointLabels:{font:{size:11,family:"'DM Sans',sans-serif"},color:'#0d2137'},
+                        angleLines:{color:'rgba(0,0,0,.08)'}}},
+                plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` Score: ${c.raw} / 25`}}}}
         });
-    }
 
-    // ══════════════════════════════════════════════════════════════════
-    // RENDER RESULTS
-    // ══════════════════════════════════════════════════════════════════
-    function renderResults() {
-        const scores = PRINCIPLES.map((_,i) => scoreFor(i));
-        // chart
-        if (radarChart) { radarChart.data.datasets[0].data = scores; radarChart.update(); }
-
-        // list
-        const list = document.getElementById('results-list');
-        list.innerHTML = PRINCIPLES.map((p,i) => {
-            const sc   = scores[i];
-            const lv   = getLevel(sc);
-            const na   = naCountFor(i);
-            const done = answeredFor(i);
-            const pct  = sc / 25 * 100;
+        // Score list
+        const total=PRINCIPLES.reduce((s,_,i)=>s+scoreFor(i),0);
+        document.getElementById('results-sub').textContent=`Total: ${total} / 200`;
+        document.getElementById('results-list').innerHTML=PRINCIPLES.map((p,i)=>{
+            const sc=scoreFor(i),lv=getLevel(sc),na=naCountFor(i),pct=sc/25*100;
             return `<div class="r-row ${lv.cls}">
       <span class="r-emoji">${lv.emoji}</span>
       <div style="flex:1;min-width:0">
         <div style="display:flex;align-items:center;justify-content:space-between">
           <div class="r-name">P${i+1} · ${p.short}</div>
-          <div class="r-score">${done<5?'—':sc}<span style="font-size:.65rem;color:var(--gray-400)">/25</span></div>
+          <div class="r-score">${sc}<span style="font-size:.6rem;color:var(--gray-400)">/25</span></div>
         </div>
         ${na>0?`<div class="r-na">${na} N/A</div>`:''}
         <div class="r-bar ${lv.cls}" style="width:${pct}%"></div>
@@ -707,85 +484,56 @@
     </div>`;
         }).join('');
 
-        // incomplete banner
-        const allDone = PRINCIPLES.every((_,i) => answeredFor(i)===5);
-        const anyStarted = PRINCIPLES.some((_,i) => answeredFor(i)>0);
-        const banner = document.getElementById('incomplete-banner');
-        banner.className = `incomplete-banner${anyStarted && !allDone?' show':''}`;
-
-        // subtitle
-        const total = scores.reduce((a,b)=>a+b,0);
-        document.getElementById('results-sub').textContent =
-            allDone ? `Total: ${total} / 200 · All principles completed` : 'Updates live as you answer';
-    }
-
-    // ══════════════════════════════════════════════════════════════════
-    // RENDER INTERPRET
-    // ══════════════════════════════════════════════════════════════════
-    function renderInterpret() {
-        const wrap = document.getElementById('interpret-wrap');
-        wrap.innerHTML = PRINCIPLES.map((p,pi) => {
-            const sc    = scoreFor(pi);
-            const lv    = getLevel(sc);
-            const done  = answeredFor(pi) === p.questions.length;
-            const lvIdx = LEVEL_DATA.indexOf(lv);
-            const lvKeys = ['black','red','yellow','green'];
-
-            const levelsHtml = p.cando.map((cd,li) => {
-                const isCurrent = done && li === lvIdx;
-                return `<div class="interp-level lv-${lvKeys[li]}${isCurrent?' current':''}">
-        <div class="il-label">${LEVEL_DATA[li].emoji} ${LEVEL_DATA[li].label}${isCurrent?`<span class="current-marker lv-${lvKeys[li]}">You</span>`:''}</div>
+        // Interpret
+        document.getElementById('interpret-wrap').innerHTML=PRINCIPLES.map((p,pi)=>{
+            const sc=scoreFor(pi),lv=getLevel(sc),lvIdx=LEVEL_DATA.indexOf(lv);
+            const levelsHtml=p.cando.map((cd,li)=>{
+                const cur=li===lvIdx;
+                return `<div class="interp-level lv-${LV_KEYS[li]}${cur?' current':''}">
+        <div class="il-label">${LEVEL_DATA[li].emoji} ${LEVEL_DATA[li].label}${cur?`<span class="current-marker">You</span>`:''}</div>
         <div class="il-can">${cd}</div>
       </div>`;
             }).join('');
-
-            const examplesHtml = p.examples.map((ex,li) => {
-                const isCurrent = done && li === lvIdx;
-                return `<div class="ie-item lv-${lvKeys[li]}${isCurrent?' current':''}">
-        <div class="ie-dot">${LEVEL_DATA[li].emoji}</div>${ex}
-      </div>`;
+            const examplesHtml=p.examples.map((ex,li)=>{
+                const cur=li===lvIdx;
+                return `<div class="ie-item lv-${LV_KEYS[li]}${cur?' current':''}"><div class="ie-dot">${LEVEL_DATA[li].emoji}</div>${ex}</div>`;
             }).join('');
-
-            const pdHtml = p.pdLinks ? `<div style="padding:12px 16px;background:var(--teal-muted);border-top:1px solid var(--border)">
+            const pdHtml=p.pdLinks?`<div style="padding:9px 13px;background:var(--teal-muted);border-top:1px solid var(--border)">
       <div class="ie-label">Professional Development Resources</div>
-      ${p.pdLinks.map(l=>`<a href="${l.url}" target="_blank" style="display:block;font-size:.78rem;color:var(--teal);text-decoration:underline;margin-bottom:4px">${l.label}</a>`).join('')}
-    </div>` : '';
-
+      ${p.pdLinks.map(l=>`<a href="${l.url}" target="_blank" style="display:block;font-size:.73rem;color:var(--teal);text-decoration:underline;margin-bottom:3px">${l.label}</a>`).join('')}
+    </div>`:'';
             return `<div class="interp-block">
       <div class="interp-hdr" onclick="toggleInterp(${pi})">
-        <span class="interp-emoji">${done?lv.emoji:'○'}</span>
+        <span class="interp-emoji">${lv.emoji}</span>
         <span class="interp-title">Principle ${pi+1} — ${p.short}</span>
-        ${done?`<span class="interp-score-badge ${lv.cls}">${sc}/25 · ${lv.label}</span>`:'<span style="font-size:.72rem;color:var(--gray-400)">not yet answered</span>'}
+        <span class="interp-score-badge ${lv.cls}">${sc}/25 · ${lv.label}</span>
         <span class="interp-toggle" id="itoggle-${pi}">▾</span>
       </div>
       <div class="interp-body" id="ibody-${pi}">
         <div class="interp-levels">${levelsHtml}</div>
-        <div class="interp-example">
-          <div class="ie-label">Examples of teaching and learning activities</div>
-          <div class="ie-grid">${examplesHtml}</div>
-        </div>
+        <div class="interp-example"><div class="ie-label">Examples of teaching and learning activities</div><div class="ie-grid">${examplesHtml}</div></div>
         ${pdHtml}
       </div>
     </div>`;
         }).join('');
+
+        document.getElementById('results-card').style.display='block';
+        document.getElementById('interpret-card').style.display='block';
+        document.getElementById('restart-card').style.display='block';
+        setTimeout(()=>document.getElementById('results-card').scrollIntoView({behavior:'smooth',block:'start'}),80);
     }
 
-    function toggleInterp(pi) {
-        const body = document.getElementById(`ibody-${pi}`);
-        const tog  = document.getElementById(`itoggle-${pi}`);
-        const open = body.classList.toggle('open');
-        tog.className = `interp-toggle${open?' open':''}`;
+    function toggleInterp(pi){
+        const body=document.getElementById(`ibody-${pi}`);
+        const tog=document.getElementById(`itoggle-${pi}`);
+        const open=body.classList.toggle('open');
+        tog.className=`interp-toggle${open?' open':''}`;
     }
 
-    function scrollToResults() {
-        document.getElementById('results-card').scrollIntoView({behavior:'smooth',block:'start'});
-    }
-
-    function toast(msg) {
-        const t = document.getElementById('toast');
-        t.textContent = msg;
-        t.classList.add('show');
-        setTimeout(()=>t.classList.remove('show'),3000);
+    function showToast(msg){
+        const t=document.getElementById('toast');
+        t.textContent=msg;t.classList.add('show');
+        setTimeout(()=>t.classList.remove('show'),3500);
     }
 </script>
 </body>
