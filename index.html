@@ -6,7 +6,32 @@
     <title>Transformative Education Diagnostic Tool</title>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
+        /* ── GDPR PAGE ── */
+        #gdpr-page{min-height:100vh;background:#F0F2F6;display:flex;align-items:center;justify-content:center;padding:24px 16px}
+        .gdpr-card{background:white;border-radius:12px;box-shadow:0 2px 8px rgba(13,33,55,.1);max-width:720px;width:100%;overflow:hidden}
+        .gdpr-header{background:var(--navy);padding:22px 26px;display:flex;align-items:center;gap:12px}
+        .gdpr-header svg{flex-shrink:0}
+        .gdpr-header h1{font-family:'EB Garamond',serif;font-size:1.3rem;font-weight:500;color:white;line-height:1.3}
+        .gdpr-header h1 em{color:var(--teal-light)}
+        .gdpr-body{padding:24px 26px;display:flex;flex-direction:column;gap:20px}
+        .gdpr-section h3{font-family:'EB Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--navy);margin-bottom:8px}
+        .gdpr-section p{font-size:.85rem;color:var(--gray-700);line-height:1.75}
+        .gdpr-section ul{margin:8px 0 0 18px;display:flex;flex-direction:column;gap:4px}
+        .gdpr-section ul li{font-size:.85rem;color:var(--gray-700);line-height:1.65}
+        .gdpr-section ul li strong{color:var(--navy)}
+        .gdpr-divider{height:1px;background:var(--border)}
+        .gdpr-consent{background:var(--gray-50);border:1.5px solid var(--border);border-radius:8px;padding:14px 16px;display:flex;align-items:flex-start;gap:12px}
+        .gdpr-consent input[type=checkbox]{width:17px;height:17px;margin-top:2px;accent-color:var(--teal);flex-shrink:0;cursor:pointer}
+        .gdpr-consent label{font-size:.84rem;color:var(--gray-700);line-height:1.6;cursor:pointer}
+        .gdpr-footer{padding:0 26px 24px;display:flex;justify-content:flex-end}
+        .gdpr-btn{background:var(--teal);color:white;border:none;border-radius:var(--r);padding:11px 22px;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;transition:background .15s;opacity:.45;pointer-events:none}
+        .gdpr-btn.ready{opacity:1;pointer-events:auto}
+        .gdpr-btn.ready:hover{background:#005a62}
+        @media(max-width:600px){.gdpr-header{padding:16px 18px}.gdpr-body{padding:18px}.gdpr-footer{padding:0 18px 18px}}
+
         :root {
             --navy:#0d2137; --teal:#006D77; --teal-light:#83C5BE; --teal-muted:#EDF6F9;
             --border:#D4D8E0; --gray-50:#F7F8FA; --gray-100:#ECEEF2;
@@ -169,6 +194,10 @@
 
         .toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy);color:white;padding:10px 18px;border-radius:8px;font-size:.8rem;opacity:0;transition:all .25s;pointer-events:none;z-index:600;max-width:88vw;text-align:center}
         .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+        /* ── SEND BUTTON ── */
+        .send-btn{background:#1a7a4a;color:white;border:none;border-radius:var(--r);padding:9px 17px;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+        .send-btn:hover{background:#145f39}
+        .send-btn:disabled{opacity:.55;cursor:not-allowed}
 
         /* ── RESPONSIVE ── */
         @media(max-width:600px){
@@ -193,11 +222,52 @@
 </head>
 <body>
 
-<header class="hdr">
+<!-- ═══════════════════════════════════════════
+     GDPR PAGE — shown first, hides on consent
+═══════════════════════════════════════════ -->
+<div id="gdpr-page">
+    <div class="gdpr-card">
+        <div class="gdpr-header">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-light)" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <h1>Data Protection and Consent — <em>GDPR</em></h1>
+        </div>
+        <div class="gdpr-body">
+            <div class="gdpr-section">
+                <h3>Your rights under the EU General Data Protection Regulation (GDPR)</h3>
+                <p>You have several rights regarding the data collected about you:</p>
+                <ul>
+                    <li><strong>Access:</strong> You have the right to request access to the data processed about you.</li>
+                    <li><strong>Corrections:</strong> You can ask for any incorrect data to be corrected.</li>
+                    <li><strong>Deletion and Restriction:</strong> You may request that your data be deleted or that its processing be restricted. However, please note that the right to deletion or restriction does not apply if the data is essential for the research.</li>
+                </ul>
+                <p style="margin-top:10px">To exercise your rights, contact Tobias Alfvén at <a href="mailto:tobias.alfven@ki.se" style="color:var(--teal)">tobias.alfven@ki.se</a> who is responsible for your personal data. The Data Protection Officer can also be reached at <a href="mailto:dataskyddsombud@ki.se" style="color:var(--teal)">dataskyddsombud@ki.se</a>. If you are dissatisfied with how your personal data is handled, you can file a complaint with the Swedish Authority for Privacy Protection.</p>
+            </div>
+            <div class="gdpr-divider"></div>
+            <div class="gdpr-section">
+                <h3>What happens to my data?</h3>
+                <p>Your participation in this survey is completely anonymous, no personal data is collected and no one will be able to identify you from your responses. The data collected will be securely stored and managed according to Karolinska Institutet's (KI) data protection guidelines. Your answers will be processed in such a way that they remain confidential and inaccessible to unauthorized persons.</p>
+            </div>
+            <div class="gdpr-divider"></div>
+            <div class="gdpr-section">
+                <h3>How can I access the survey results?</h3>
+                <p>To receive information about the study's results, please contact Jennifer Valcke at <a href="mailto:jennifer.valcke@ki.se" style="color:var(--teal)">jennifer.valcke@ki.se</a>.</p>
+            </div>
+            <div class="gdpr-consent">
+                <input type="checkbox" id="gdpr-checkbox" onchange="toggleGdprBtn()">
+                <label for="gdpr-checkbox">I have read and understood the information above regarding data protection and consent.</label>
+            </div>
+        </div>
+        <div class="gdpr-footer">
+            <button class="gdpr-btn" id="gdpr-proceed-btn" onclick="acceptGdpr()">Proceed to Survey →</button>
+        </div>
+    </div>
+</div>
+
+<header class="hdr" id="main-hdr" style="display:none">
     <h1>Transformative Education — <em>Karolinska Institutet</em></h1>
 </header>
 
-<div class="wrap" id="main-wrap">
+<div class="wrap" id="main-wrap" style="display:none">
 
     <!-- USER GUIDE -->
     <div class="card" id="guide-card">
@@ -271,6 +341,10 @@
     <div class="card" id="restart-card" style="display:none">
         <div class="action-row">
             <button class="btn btn-ghost" onclick="location.reload()">↺ Start Over</button>
+            <button class="send-btn" id="send-btn" onclick="sendResults()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                Send Results to Jennifer Valcke
+            </button>
         </div>
     </div>
 
@@ -278,6 +352,111 @@
 <div class="toast" id="toast"></div>
 
 <script>
+    // ── EmailJS init ──
+    emailjs.init({ publicKey: 'ZLGrsMwCKFfI-JRrx' });
+
+    // ── GDPR ──
+    function toggleGdprBtn(){
+        const cb  = document.getElementById('gdpr-checkbox');
+        const btn = document.getElementById('gdpr-proceed-btn');
+        btn.classList.toggle('ready', cb.checked);
+    }
+
+    function acceptGdpr(){
+        if(!document.getElementById('gdpr-checkbox').checked) return;
+        document.getElementById('gdpr-page').style.display   = 'none';
+        document.getElementById('main-hdr').style.display    = 'flex';
+        document.getElementById('main-wrap').style.display   = 'flex';
+    }
+
+    // ── Send results via EmailJS ──
+    async function sendResults(){
+        const btn = document.getElementById('send-btn');
+        btn.disabled = true;
+        btn.innerHTML = '⏳ Sending…';
+
+        try {
+            const total = PRINCIPLES.reduce((s,_,i)=>s+scoreFor(i),0);
+
+            // Capture radar chart as PNG (native canvas — no html2canvas needed)
+            let radarImgTag = '';
+            try {
+                const canvas = document.getElementById('radar-canvas');
+                if(canvas){
+                    const dataUrl = canvas.toDataURL('image/png');
+                    radarImgTag = `<div style="text-align:center;padding:20px 28px 8px;background:#f7f8fc;">
+  <p style="margin:0 0 10px;font-size:11px;color:#8C94A6;font-weight:700;letter-spacing:.06em;text-transform:uppercase;">Radar Diagram</p>
+  <img src="${dataUrl}" alt="Radar diagram" width="260" style="max-width:100%;border-radius:8px;" />
+</div>`;
+                }
+            } catch(e){ /* radar capture optional */ }
+
+            // Build inline-CSS HTML table — renders in all email clients
+            const rows = PRINCIPLES.map((p,i)=>{
+                const sc  = scoreFor(i);
+                const lv  = getLevel(sc);
+                const pct = Math.round(sc/25*100);
+                const barColor = lv.key==='green'?'#1a7a4a':lv.key==='yellow'?'#D4A017':lv.key==='red'?'#C0392B':'#888';
+                return `<tr>
+  <td style="padding:10px 12px;border-bottom:1px solid #eee;font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;color:#0d2137;">
+    ${lv.emoji} P${i+1} &mdash; ${p.short}
+  </td>
+  <td style="padding:10px 12px;border-bottom:1px solid #eee;text-align:center;font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;font-weight:700;color:#0d2137;white-space:nowrap;">
+    ${sc}<span style="font-size:11px;color:#8C94A6;font-weight:400">/25</span>
+  </td>
+  <td style="padding:10px 12px;border-bottom:1px solid #eee;min-width:120px;">
+    <div style="background:#eee;border-radius:4px;height:8px;overflow:hidden;">
+      <div style="background:${barColor};width:${pct}%;height:8px;border-radius:4px;"></div>
+    </div>
+  </td>
+  <td style="padding:10px 12px;border-bottom:1px solid #eee;font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;color:${barColor};font-weight:700;white-space:nowrap;">
+    ${lv.label}
+  </td>
+</tr>`;
+            }).join('');
+
+            const html = `<div style="font-family:'Helvetica Neue',Arial,sans-serif;max-width:600px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e0e4ef;">
+  <div style="background:#0d2137;padding:24px 28px;">
+    <p style="margin:0;color:#83c5be;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;">Karolinska Institutet</p>
+    <h2 style="margin:6px 0 0;color:#fff;font-size:20px;font-weight:700;">Transformative Education Diagnostic Tool</h2>
+    <p style="margin:6px 0 0;color:#a8b4c8;font-size:14px;">Self-Assessment Results</p>
+  </div>
+  <div style="padding:20px 28px 8px;background:#f7f8fc;">
+    <p style="margin:0;font-size:13px;color:#5a6478;">Total Score</p>
+    <p style="margin:4px 0 0;font-size:28px;font-weight:700;color:#0d2137;">${total}<span style="font-size:14px;color:#8C94A6;font-weight:400"> / 200</span></p>
+  </div>
+  ${radarImgTag}
+  <table style="width:100%;border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f7f8fc;">
+        <th style="padding:8px 12px;text-align:left;font-size:11px;color:#8C94A6;font-weight:700;letter-spacing:.06em;text-transform:uppercase;">Principle</th>
+        <th style="padding:8px 12px;text-align:center;font-size:11px;color:#8C94A6;font-weight:700;letter-spacing:.06em;text-transform:uppercase;">Score</th>
+        <th style="padding:8px 12px;font-size:11px;color:#8C94A6;font-weight:700;letter-spacing:.06em;text-transform:uppercase;">Progress</th>
+        <th style="padding:8px 12px;font-size:11px;color:#8C94A6;font-weight:700;letter-spacing:.06em;text-transform:uppercase;">Level</th>
+      </tr>
+    </thead>
+    <tbody>${rows}</tbody>
+  </table>
+  <div style="padding:16px 28px;background:#f7f8fc;border-top:1px solid #e0e4ef;">
+    <p style="margin:0;font-size:11px;color:#8C94A6;">⚫ Emerging (0–10) &nbsp;|&nbsp; 🔴 Developing (11–15) &nbsp;|&nbsp; 🟡 Proficient (16–20) &nbsp;|&nbsp; 🟢 Transformative (21–25)</p>
+  </div>
+</div>`;
+
+            await emailjs.send('service_5aflsy5', 'template_a68tkn5', {
+                to_email: 'amnaaldaraji@gmail.com',
+                message : html,
+            });
+
+            showToast('✓ Results sent to Jennifer Valcke!');
+        } catch(err){
+            console.error('EmailJS error:', err);
+            showToast('⚠ Could not send — please try again.');
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Send Results to Jennifer Valcke';
+        }
+    }
+
     const PRINCIPLES = [
         {
             short:"Inclusive Behaviours",
