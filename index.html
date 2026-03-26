@@ -200,6 +200,13 @@
         .send-btn:disabled{opacity:.55;cursor:not-allowed}
 
         /* ── RESPONSIVE ── */
+        @media(max-width:768px){
+            .wrap{padding:14px 10px 70px}
+            .interp-levels{grid-template-columns:1fr 1fr}
+            .ie-grid{grid-template-columns:1fr 1fr}
+            .score-legend{grid-template-columns:1fr 1fr}
+            .scale-row{grid-template-columns:1fr 1fr}
+        }
         @media(max-width:600px){
             .hdr{padding:0 12px}
             .hdr h1{font-size:.88rem}
@@ -212,11 +219,17 @@
             .ie-grid{grid-template-columns:1fr 1fr}
             .p-nav-btn{font-size:.66rem;padding:3px 7px}
             .arrow-btn{padding:6px 10px;font-size:.71rem}
+            .action-row{flex-direction:column}
+            .send-btn,.btn{width:100%;justify-content:center}
+            .guide-hero h2{font-size:1.35rem}
+            .p-footer{flex-wrap:wrap;gap:7px}
+            .p-prog{min-width:100%;order:3}
         }
         @media(max-width:360px){
             .scale-btns{grid-template-columns:repeat(2,1fr)}
             .interp-levels,.ie-grid{grid-template-columns:1fr}
             .score-legend{grid-template-columns:1fr}
+            .p-nav-btn{font-size:.6rem;padding:2px 5px}
         }
     </style>
 </head>
