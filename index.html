@@ -378,21 +378,32 @@
         try {
             const total = PRINCIPLES.reduce((s,_,i)=>s+scoreFor(i),0);
 
-            // Capture radar chart — shrink to 280px JPEG to stay well under 50KB EmailJS limit
-            let radarImgTag = '';
-            try {
-                const canvas = document.getElementById('radar-canvas');
-                if(canvas){
-                    const off = document.createElement('canvas');
-                    off.width = 280; off.height = 280;
-                    off.getContext('2d').drawImage(canvas, 0, 0, 280, 280);
-                    const dataUrl = off.toDataURL('image/jpeg', 0.65);
-                    radarImgTag = `<div style="text-align:center;padding:20px 28px 8px;background:#f7f8fc;">
-  <p style="margin:0 0 10px;font-size:11px;color:#8C94A6;font-weight:700;letter-spacing:.06em;text-transform:uppercase;">Radar Diagram</p>
-  <img src="${dataUrl}" alt="Radar diagram" width="260" style="max-width:100%;border-radius:8px;" />
-</div>`;
+            // Build radar chart URL via QuickChart (public URL — works in all email clients incl. Gmail)
+            const scores = PRINCIPLES.map((_,i) => scoreFor(i));
+            const labels = PRINCIPLES.map((_,i) => `P${i+1}`);
+            const chartCfg = {
+                type: 'radar',
+                data: {
+                    labels,
+                    datasets: [{
+                        label: 'Your score',
+                        data: scores,
+                        backgroundColor: 'rgba(0,109,119,0.18)',
+                        borderColor: '#006D77',
+                        pointBackgroundColor: '#006D77',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    scale: { ticks: { min: 0, max: 25, stepSize: 5 } },
+                    legend: { display: false }
                 }
-            } catch(e){ /* radar capture optional */ }
+            };
+            const radarUrl = 'https://quickchart.io/chart?w=280&h=280&c=' + encodeURIComponent(JSON.stringify(chartCfg));
+            const radarImgTag = `<div style="text-align:center;padding:20px 28px 8px;background:#f7f8fc;">
+  <p style="margin:0 0 10px;font-size:11px;color:#8C94A6;font-weight:700;letter-spacing:.06em;text-transform:uppercase;">Radar Diagram</p>
+  <img src="${radarUrl}" alt="Radar diagram" width="260" style="max-width:100%;border-radius:8px;" />
+</div>`;
 
             // Build inline-CSS HTML table — renders in all email clients
             const rows = PRINCIPLES.map((p,i)=>{
