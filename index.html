@@ -304,6 +304,10 @@
             </div>
         </div>
         <div class="start-btn-wrap">
+            <div style="margin-bottom:14px;">
+                <label for="course-code-input" style="display:block;font-size:.85rem;font-weight:600;color:var(--navy);margin-bottom:5px;">Course Code <span style="color:#c0392b">*</span></label>
+                <input type="text" id="course-code-input" placeholder="e.g. BIO27" style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.9rem;box-sizing:border-box;">
+            </div>
             <button class="btn btn-primary" onclick="startTool()">Begin Self-Assessment →</button>
         </div>
     </div>
@@ -469,8 +473,10 @@
   </div>
 </div>`;
 
+            const courseCode = document.getElementById('course-code-input').value.trim();
             await emailjs.send('service_5aflsy5', 'template_a68tkn5', {
                 to_email: 'jennifer.valcke@ki.se',
+                subject : `Transformative Education Results — ${courseCode}`,
                 message : html,
             });
 
@@ -570,6 +576,8 @@
     let currentP = 0;
 
     function startTool(){
+        const code = document.getElementById('course-code-input').value.trim();
+        if(!code){ alert('Please enter your course code before starting.'); return; }
         document.getElementById('guide-card').style.display='none';
         document.getElementById('q-card').style.display='block';
         buildNav(); buildPanels(); showPrinciple(0);
