@@ -99,6 +99,12 @@
         .q-block{border:1.5px solid var(--border);border-radius:8px;overflow:hidden;transition:border-color .2s}
         .q-block.answered{border-color:var(--teal)}
         .q-text{padding:10px 12px;background:var(--gray-50);border-bottom:1px solid var(--border);font-family:'EB Garamond',serif;font-size:.92rem;color:var(--navy);line-height:1.5}
+        .q-hint-btn{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:var(--teal);color:#fff;font-size:.6rem;font-family:'DM Sans',sans-serif;font-weight:700;cursor:pointer;margin-left:6px;flex-shrink:0;vertical-align:middle;border:none;padding:0;line-height:1}
+        .q-hint-btn:focus{outline:2px solid var(--teal);outline-offset:2px}
+        #hint-tooltip{position:fixed;background:#1a2e44;color:#e8edf3;font-family:'DM Sans',sans-serif;font-size:.75rem;line-height:1.55;padding:10px 13px;border-radius:8px;width:280px;max-width:90vw;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,.3);pointer-events:none;opacity:0;transition:opacity .15s;white-space:normal;display:none}
+        #hint-tooltip.visible{opacity:1;display:block}
+        #hint-tooltip::after{content:'';position:absolute;top:100%;left:var(--arrow-left,50%);transform:translateX(-50%);border:6px solid transparent;border-top-color:#1a2e44}
+        #hint-tooltip .qt-title{font-weight:700;color:#83c5be;margin-bottom:4px;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;display:block}
         .q-num{font-family:'DM Sans',sans-serif;font-size:.61rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gray-400);display:block;margin-bottom:2px}
 
         /* 6-column grid on desktop, 3-column on mobile, 2-column on tiny */
@@ -374,6 +380,7 @@
 
 </div>
 <div class="toast" id="toast"></div>
+<div id="hint-tooltip"><span class="qt-title">Some examples include:</span><span id="hint-tooltip-body"></span></div>
 
 <script>
     // ── EmailJS init ──
@@ -567,6 +574,65 @@
         }
     ];
 
+    const HINTS = [
+        [
+            `Start each session by establishing ground rules that emphasise respect, confidentiality, and active listening. Use anonymous polling tools for students to express opinions or ask questions on sensitive issues without fear of judgment.`,
+            `Use gender-neutral language - "they" instead of assuming "he/she" - and encourage learners to correct each other respectfully when assumptions are made. Celebrate the use of various dialects and accents to show that all forms of communication are valid.`,
+            `When discussing case studies, use examples from different cultural contexts and ask learners from various backgrounds to share their unique perspectives or experiences on the topic.`,
+            `Share personal experiences where you have faced uncertainty in your field. Show that it's okay to not always have the answers, encouraging learners to reflect on how they deal with ambiguity.`,
+            `Rather than lecturing, structure a lesson around group discussions where students explore the material, with your role focused on guiding, asking open questions, and helping students find their own answers.`,
+        ],
+        [
+            `Create group projects where each team member has a specific role that they must report back on, followed by peer and self-assessments of collaboration skills.`,
+            `Design feedback activities where students periodically reflect on their progress. Allow students to choose their project topics based on their interests.`,
+            `Introduce flipped classroom methods, where students review course materials at home (e.g., recorded lectures or readings) and use class time for active problem-solving or group discussions. Consider experimenting with gamification, with virtual/augmented reality tools, or with simulations.`,
+            `Offer materials in different formats - visual, audio, written - to accommodate diverse learner needs. Provide various options for submission of assignments (e.g., presentations, reports, videos) to meet different learner preferences.`,
+            `Implement regular check-ins where you provide feedback focused on improvement rather than just grades. Offer actionable steps and resources that help them address the areas where they need development.`,
+        ],
+        [
+            `After clinical placements or work-based placement or group work, have learners write reflective journals on their experiences interacting with diverse groups.`,
+            `Get learners to create role-play activities where they take on roles from different cultural or professional backgrounds and navigate a simulated conflict or difficult conversation.`,
+            `Review course materials to revisit outdated or Eurocentric content and replace them with sources that represent diverse perspectives and histories within your discipline. Communicate your positionality and way of thinking to your learners.`,
+            `If a controversial comment or situation arises in class, pause to address it respectfully, guiding learners to explore why it's contentious and what can be learned from the experience. You can use models, such as the OSEE framework to enhance observational and communication skills.`,
+            `Use real-world case studies that highlight cultural misunderstandings or ethical dilemmas, facilitating group discussions where learners can voice their perspectives and gently correcting any misconceptions or biases that arise.`,
+        ],
+        [
+            `Incorporate case studies where learners must consider a patient's background when making healthcare decisions, such as traditional healing practices or language barriers.`,
+            `Assign research projects where learners compare how a local issue, like water pollution, is addressed in different countries, discussing the impact of local governance and global policies on healthcare.`,
+            `When teaching a medical condition, discuss its global prevalence, differing treatments in various countries across income levels, and how socioeconomic factors affect outcomes.`,
+            `Partner with international institutions for virtual exchange projects where your learners collaborate with peers from different countries to solve shared global issues.`,
+            `Teach learners about global health crises (e.g., pandemics, climate change) and ask them to analyse how those issues impact local communities or healthcare systems.`,
+        ],
+        [
+            `When discussing healthcare policies or legal frameworks, tie them back to human rights, such as equitable treatment in healthcare.`,
+            `Role-playing activities that allow students to take on different perspectives, discussions on prejudice and discrimination, or project-based activities that encourage students to analyse and reflect on the root causes of global issues, etc.`,
+            `Include discussions on how environmental/economic/political/social/cultural factors disproportionately affect disadvantaged populations, and explore sustainable healthcare practices that address these inequities.`,
+            `Regularly update course content to include emerging ethical challenges in the profession and invite guest speakers who advocate for social responsibility in your field.`,
+            `Seek anonymous feedback from learners on whether they feel empowered or marginalised in class discussions and adjust your teaching methods to minimise any unintended hierarchies. Use such frameworks as cultural humility and intersectionality with your learners.`,
+        ],
+        [
+            `Organise interdisciplinary group projects where learners from different fields (e.g., medicine, nursing, public health) collaborate to solve a common issue.`,
+            `Analysing the effects of globalization on nursing from a historical perspective; investigating how Global (Public) Health is based on and inextricably linked to the Eurocentric conception of the (hu)man, etc.`,
+            `Include different ways of engaging with assignments and assessments to cater to different learner and communication needs - for example: oral presentations, written reports, and multimedia presentations.`,
+            `Offer office hours and additional resources to learners who require more support, tailoring feedback and instruction to their specific needs.`,
+            `Encourage learners to share how their personal, cultural, or academic backgrounds shape their views on the subject matter and show appreciation for diverse perspectives during discussions.`,
+        ],
+        [
+            `Use open-ended case studies where learners must debate multiple solutions, emphasising that not all problems have single answers.`,
+            `Ask learners to develop and prototype a creative solution to a real-world community or healthcare challenge, requiring them to justify their design choices and reflect on the ethical, social, and practical implications of their approach.`,
+            `Addressing your own values and beliefs regarding sexual orientation, gender identity, gender expression, race, and ethnicity together with the students; analysing internal/implicit biases, prejudices, privilege, and identifying areas for personal growth.`,
+            `Incorporate readings, videos, and guest speakers from historically underrepresented voices in your field, ensuring that learners are exposed to a broad range of perspectives.`,
+            `Replace Eurocentric textbooks with readings that include contributions from scholars in Africa, Asia, and Central/South America, reflecting global and indigenous knowledge systems.`,
+        ],
+        [
+            `Set aside time with my teaching team to review learner evaluations, analyse my lesson plans, and assess whether the learning outcomes were reached. Consider keeping a reflective teaching journal where you record challenges, what worked well, and areas where you want to grow.`,
+            `Participate in training or workshops that address the implicit biases you may have in relation to learner performance or cultural backgrounds.`,
+            `Participate in training or workshops that raise my awareness of how subtle microaggressions or favouring certain learners during discussions can inadvertently create a less inclusive learning environment.`,
+            `Regularly share with your learners how you stay current and continue learning in your discipline. You might do this by presenting case studies from recent advancements in your field and encouraging your learners to adopt a similar mindset of continuous self-improvement.`,
+            `Actively solicit informal feedback from learners through anonymous surveys or informal check-ins. Similarly, you might invite a colleague to observe one of your classes and provide constructive feedback on your teaching methods as a critical friend.`,
+        ],
+    ];
+
     const SCALE_LABELS = ["Never","Rarely","Occasionally","Often","Very often","N/A"];
     const LEVEL_DATA = [
         {key:"black",emoji:"⚫",min:0, max:10, label:"Emerging",      cls:"sc-black",color:"#888"},
@@ -611,7 +677,7 @@
       <div class="questions">
         ${p.questions.map((q,qi)=>`
         <div class="q-block" id="qb-${pi}-${qi}">
-          <div class="q-text"><span class="q-num">Q${qi+1}</span>${q}</div>
+          <div class="q-text"><span class="q-num">Q${qi+1}</span>${q}${HINTS[pi]&&HINTS[pi][qi]?`<button class="q-hint-btn" aria-label="Show examples" data-hint="${HINTS[pi][qi].replace(/"/g,'&quot;')}" tabindex="0">i</button>`:''}</div>
           <div class="scale-btns">
             ${SCALE_LABELS.map((lb,vi)=>`<button class="scale-btn" id="sb-${pi}-${qi}-${vi+1}" onclick="setAnswer(${pi},${qi},${vi+1})">${lb}</button>`).join('')}
           </div>
@@ -753,6 +819,48 @@
         t.textContent=msg;t.classList.add('show');
         setTimeout(()=>t.classList.remove('show'),3500);
     }
+
+    (function(){
+        const tip=document.getElementById('hint-tooltip');
+        const tipBody=document.getElementById('hint-tooltip-body');
+        function positionTip(btn){
+            const r=btn.getBoundingClientRect();
+            const tw=Math.min(280,window.innerWidth*0.9);
+            tip.style.width=tw+'px';
+            let left=r.left+r.width/2-tw/2;
+            if(left<8) left=8;
+            if(left+tw>window.innerWidth-8) left=window.innerWidth-tw-8;
+            const top=r.top-8;
+            tip.style.left=left+'px';
+            tip.style.top=top+'px';
+            tip.style.transform='translateY(-100%)';
+            // arrow offset
+            const arrowLeft=r.left+r.width/2-left;
+            tip.style.setProperty('--arrow-left',arrowLeft+'px');
+        }
+        document.addEventListener('mouseover',function(e){
+            const btn=e.target.closest('.q-hint-btn');
+            if(!btn) return;
+            tipBody.textContent=btn.dataset.hint||'';
+            tip.classList.add('visible');
+            positionTip(btn);
+        });
+        document.addEventListener('mouseout',function(e){
+            if(!e.target.closest('.q-hint-btn')) return;
+            tip.classList.remove('visible');
+        });
+        document.addEventListener('focus',function(e){
+            const btn=e.target.closest('.q-hint-btn');
+            if(!btn) return;
+            tipBody.textContent=btn.dataset.hint||'';
+            tip.classList.add('visible');
+            positionTip(btn);
+        },true);
+        document.addEventListener('blur',function(e){
+            if(!e.target.closest('.q-hint-btn')) return;
+            tip.classList.remove('visible');
+        },true);
+    })();
 </script>
 </body>
 </html>
