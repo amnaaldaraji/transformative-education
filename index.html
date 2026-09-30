@@ -207,6 +207,17 @@
         .send-btn{background:#1a7a4a;color:white;border:none;border-radius:var(--r);padding:9px 17px;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
         .send-btn:hover{background:#145f39}
         .send-btn:disabled{opacity:.55;cursor:not-allowed}
+        .pdf-btn{background:white;color:#1a7a4a;border:1.5px solid #1a7a4a;border-radius:var(--r);padding:9px 17px;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:7px}
+        .pdf-btn:hover{background:#f0faf5}
+        @media print{
+          #gdpr-page,#hint-tooltip,.toast{display:none!important}
+          #main-wrap{display:block!important}
+          #guide-card,#q-card,#restart-card,.nav-bar{display:none!important}
+          #results-card{display:block!important;box-shadow:none;border:none}
+          .interp-body{display:block!important}
+          .interp-toggle{display:none!important}
+          @page{size:A4;margin:15mm}
+        }
 
         /* ── RESPONSIVE ── */
         @media(max-width:768px){
@@ -378,6 +389,10 @@
     <div class="card" id="restart-card" style="display:none">
         <div class="action-row">
             <button class="btn btn-ghost" onclick="location.reload()">↺ Start Over</button>
+            <button class="pdf-btn" onclick="savePdf()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+                Save as PDF
+            </button>
             <button class="send-btn" id="send-btn" onclick="sendResults()">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
                 Send Results to Jennifer Valcke
@@ -392,6 +407,19 @@
 <script>
     // ── EmailJS init ──
     emailjs.init({ publicKey: 'ZLGrsMwCKFfI-JRrx' });
+
+    // ── PDF ──
+    function savePdf(){
+        // Expand all interpret panels before printing
+        document.querySelectorAll('.interp-body').forEach(b => b.style.display = 'block');
+        window.print();
+        // Collapse again after (slight delay so print dialog closes first)
+        setTimeout(() => {
+            document.querySelectorAll('.interp-body').forEach((b, i) => {
+                if (!document.getElementById(`itoggle-${i}`)?.textContent.includes('▴')) b.style.display = '';
+            });
+        }, 1000);
+    }
 
     // ── GDPR ──
     function toggleGdprBtn(){
@@ -524,7 +552,7 @@
             short:"Learner-Centred Pedagogies",
             title:"Principle 2 — Developing and facilitating learner-centred pedagogies",
             desc:"…recognises and values students' diverse educational, linguistic, and cultural resources and accommodates the distinct learning needs of all students.",
-            questions:["I design activities and assess competence in collaboration and teamwork","I empower learners to take ownership of their learning processes and goals","I experiment with new teaching methods and approaches, even if they are unfamiliar or uncomfortable","I adapt teaching methods to accommodate diverse learner needs and preferences","I provide timely and constructive feedback to support learners' growth and development"],
+            questions:["I design learner-centred activities that enable students to learn from and with one another through collaboration and shared responsibility.","I empower learners to take ownership of their learning processes and goals","I experiment with new teaching methods and approaches, even if they are unfamiliar or uncomfortable","I adapt teaching methods to accommodate diverse learner needs and preferences","I provide timely and constructive feedback to support learners' growth and development"],
             cando:["I can encourage students to engage with the material at a deep level, develop a dialogue, and reflect on their progress.","I can encourage students to reflect on what they are learning, how they are learning it, and acknowledge the classroom as a learning community.","I can develop approaches or strategies based on learner-centred pedagogies that recognize and value students' diverse educational, linguistic, and cultural backgrounds.","I can design and facilitate teaching and learning in an interactive, learner-centred way that enables exploratory, action oriented and transformative learning."],
             examples:["Analysing how norms, beliefs and values shape their worldviews and the knowledge they accept as truth.","Co-designing assignments and rubrics for assessment with your students.","Group project work on how healthcare should be given to cater for patients of diverse linguistic and cultural backgrounds.","Examine narratives of healthcare to see which voices are missing — for example, how healthcare intersects with gender equality and immigration."]
         },
@@ -556,7 +584,7 @@
             short:"Interdisciplinary Learning",
             title:"Principle 6 — Integrating learning from different disciplinary contexts",
             desc:"…by promoting learning through different ways of seeing, thinking, and doing across disciplines, professions, and cultures.",
-            questions:["I design activities for and assess competences in collaboration and teamwork across disciplines","I promote problem-solving skills that intentionally draw on diverse disciplinary perspectives","I adapt teaching methods, including assessments, to accommodate diverse learner needs and preferences","I address individual learner needs and provide support as needed","I foster an environment where different ways of thinking, seeing, and doing are valued and through persons that are different to oneself"],
+            questions:["I design activities that require learners to integrate knowledge and perspectives from different disciplines to address complex problems.","I promote problem-solving skills that intentionally draw on diverse disciplinary perspectives","I adapt teaching methods, including assessments, to accommodate diverse learner needs and preferences","I address individual learner needs and provide support as needed","I foster an environment where different ways of thinking, seeing, and doing are valued and through persons that are different to oneself"],
             cando:["I can describe ethical, social, and environmental challenges in global systems and evaluate the local and broader consequences of individual and collective healthcare interventions.","I can address diverse perspectives to healthcare systems in the face of multiple and even conflicting positions (i.e., cultural, disciplinary, and ethical).","I can apply knowledge and skills to implement sophisticated, appropriate, and workable solutions to address complex global problems using interdisciplinary perspectives.","I can apply deep knowledge of the historic and contemporary role and differential effects of human organisations and actions on global systems to advocate for informed, appropriate action to solve complex health problems."],
             examples:["Analysing and explaining the impact of culture on certain health behaviours, including the assumptions, biases, prejudices, and stereotypes that are made.","Simulating treatment options to patients from diverse linguistic and cultural backgrounds and analysing them through the lens of cultural humility.","Analysing the concept of health as a Human Right and its implications for countries at different income levels through the lens of the SDGs.","Addressing the ethical, social, and environmental challenges in Global Health and evaluating the local and broader consequences of individual and collective interventions."]
         },
